@@ -11,7 +11,7 @@ The "canonical" implementation is now based on Spring Boot, Thymeleaf and [aggre
 
 ## Running petclinic locally
 ```
-	git clone https://github.com/spring-petclinic/spring-framework-petclinic.git
+	git clone https://github.com/gii-is-psg2/spring-framework-petclinic.git
 	cd spring-framework-petclinic
 	./mvnw jetty:run-war
         For Windows
