@@ -109,6 +109,11 @@ public class ClinicServiceImpl implements ClinicService {
 	public Collection<Visit> findVisitsByPetId(int petId) {
 		return visitRepository.findByPetId(petId);
 	}
+	
+	@Override
+	public Pet deletePet(Pet pet) {
+		return this.petRepository.delete(pet);
+	}
 
 
 }

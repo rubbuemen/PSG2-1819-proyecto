@@ -109,5 +109,16 @@ public class PetController {
             return "redirect:/owners/{ownerId}";
         }
     }
+    
+    @RequestMapping(value = "/pets/delete", method = RequestMethod.POST)
+    public String initDeleteForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model) {
+    	 if (result.hasErrors()) {
+             model.put("pet", pet);
+             return "redirect:/pets/{petId}/edit";
+         } else {
+        	 this.clinicService.deletePet(pet);
+        	 return "redirect:/owners/{ownerId}";
+         }
+    }
 
 }
