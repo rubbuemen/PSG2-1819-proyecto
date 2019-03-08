@@ -84,6 +84,10 @@ public class Owner extends Person {
     public void setTelephone(String telephone) {
         this.telephone = telephone;
     }
+    
+    public void deletePet(Pet pet) {
+    	getPetsInternal().remove(pet);
+    }
 
     protected Set<Pet> getPetsInternal() {
         if (this.pets == null) {

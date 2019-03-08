@@ -111,9 +111,9 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 	
 	@Override
-	public Pet deletePet(Pet pet) {
-		return this.petRepository.delete(pet);
+	@Transactional
+	public void deletePet(Pet pet) throws DataAccessException{
+		petRepository.delete(pet.getId());
 	}
-
 
 }

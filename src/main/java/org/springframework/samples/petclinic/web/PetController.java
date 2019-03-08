@@ -110,15 +110,14 @@ public class PetController {
         }
     }
     
-    @RequestMapping(value = "/pets/delete", method = RequestMethod.POST)
-    public String initDeleteForm(@Valid Pet pet, BindingResult result, Owner owner, ModelMap model) {
-    	 if (result.hasErrors()) {
-             model.put("pet", pet);
-             return "redirect:/pets/{petId}/edit";
-         } else {
-        	 this.clinicService.deletePet(pet);
-        	 return "redirect:/owners/{ownerId}";
-         }
+    @RequestMapping(value = "/pets/{petId}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable("petId") int petId, @PathVariable("ownerId") int ownerId, ModelMap model) {
+        Owner ow = this.clinicService.findOwnerById(ownerId);
+        Pet p = this.clinicService.findPetById(petId);
+        ow.deletePet(p);
+        this.clinicService.deletePet(p);
+        return "redirect:/owners/{ownerId}";
+     
     }
 
 }
