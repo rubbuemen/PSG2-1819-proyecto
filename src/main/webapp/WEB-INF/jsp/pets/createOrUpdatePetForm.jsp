@@ -46,8 +46,12 @@
                 </div>
             </div>
         </form:form>
-        <c:if test="${!pet['new']}">
-        		<a href="/owners/${owner.id}/pets/${pet.id}/delete"><fmt:message key="delete"/></a>
-        </c:if>
+         <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+					<c:if test="${!pet['new']}">
+						<a class="btn btn-default" href="/owners/${owner.id}/pets/${pet.id}/delete"><fmt:message key="deletePet"/></a>
+					</c:if>
+                </div>
+            </div>
     </jsp:body>
 </petclinic:layout>
