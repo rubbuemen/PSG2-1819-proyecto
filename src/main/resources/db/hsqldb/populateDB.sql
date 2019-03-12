@@ -51,3 +51,8 @@ INSERT INTO visits VALUES (1, 7, '2013-01-01', 'rabies shot');
 INSERT INTO visits VALUES (2, 8, '2013-01-02', 'rabies shot');
 INSERT INTO visits VALUES (3, 8, '2013-01-03', 'neutered');
 INSERT INTO visits VALUES (4, 7, '2013-01-04', 'spayed');
+
+INSERT INTO hotels VALUES (1, 1, 'Le gusta la carne', '2019-02-11');
+INSERT INTO hotels VALUES (2, 4, 'Le gusta comer mucho', '2019-06-30');
+INSERT INTO hotels VALUES (3, 1, 'Le gusta dormir tranquilo', '2019-05-23');
+INSERT INTO hotels VALUES (4, 5, 'Le gusta que lo acaricien', '2019-02-14');

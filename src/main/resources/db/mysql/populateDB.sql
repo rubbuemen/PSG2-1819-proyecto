@@ -51,3 +51,8 @@ INSERT IGNORE INTO visits VALUES (1, 7, '2010-03-04', 'rabies shot');
 INSERT IGNORE INTO visits VALUES (2, 8, '2011-03-04', 'rabies shot');
 INSERT IGNORE INTO visits VALUES (3, 8, '2009-06-04', 'neutered');
 INSERT IGNORE INTO visits VALUES (4, 7, '2008-09-04', 'spayed');
+
+INSERT IGNORE INTO hotels VALUES (1, 1, 'Le gusta la carne', '2019-02-11');
+INSERT IGNORE INTO hotels VALUES (2, 4, 'Le gusta comer mucho', '2019-06-30');
+INSERT IGNORE INTO hotels VALUES (3, 1, 'Le gusta dormir tranquilo', '2019-05-23');
+INSERT IGNORE INTO hotels VALUES (4, 5, 'Le gusta que lo acaricien', '2019-02-14');
