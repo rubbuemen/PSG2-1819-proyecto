@@ -45,7 +45,20 @@ public class Hotel extends BaseEntity {
     @DateTimeFormat(pattern = "yyyy/MM/dd")
     private LocalDate startDate;
     
-    @ManyToOne
+    @NotNull
+    @Column(name = "end_date_book")
+    @DateTimeFormat(pattern = "yyyy/MM/dd")
+    private LocalDate endDate;
+    
+    public LocalDate getEndDate() {
+		return endDate;
+	}
+
+	public void setEndDate(LocalDate endtDate) {
+		this.endDate = endtDate;
+	}
+
+	@ManyToOne
     @JoinColumn(name = "pet_id")
     private Pet pet;
     

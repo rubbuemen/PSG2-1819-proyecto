@@ -69,5 +69,6 @@ CREATE TABLE IF NOT EXISTS hotels (
   pet_id INT(4) UNSIGNED NOT NULL,
   details VARCHAR(255),
   start_date_book DATE,
+  end_date_book DATE,
   FOREIGN KEY (pet_id) REFERENCES pets(id)
 ) engine=InnoDB;
