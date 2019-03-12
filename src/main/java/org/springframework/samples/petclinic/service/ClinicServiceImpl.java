@@ -116,4 +116,10 @@ public class ClinicServiceImpl implements ClinicService {
 		petRepository.delete(pet.getId());
 	}
 
+	@Override
+	@Transactional
+	public void deleteOwner(Owner owner) throws DataAccessException {
+		ownerRepository.delete(owner.getId());	
+	}
+
 }
