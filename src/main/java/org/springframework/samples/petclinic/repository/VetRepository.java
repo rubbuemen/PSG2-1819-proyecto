@@ -38,5 +38,9 @@ public interface VetRepository {
      */
     Collection<Vet> findAll() throws DataAccessException;
 
+	Vet findById(int id) throws DataAccessException;
+
+	void save(Vet vet) throws DataAccessException;
+
 
 }

@@ -116,4 +116,18 @@ public class ClinicServiceImpl implements ClinicService {
 		petRepository.delete(pet.getId());
 	}
 
+	@Override
+	@Transactional(readOnly = true)
+	public Vet findVetById(int id) throws DataAccessException {
+		return vetRepository.findById(id);
+	}
+
+	
+	@Override
+	@Transactional
+	public void saveVet(Vet vet) throws DataAccessException {
+		vetRepository.save(vet);
+		
+	}
+
 }
