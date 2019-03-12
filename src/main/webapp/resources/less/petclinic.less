@@ -20,8 +20,8 @@
 @spring-grey:       #838789;
 @spring-light-grey: #f1f1f1;
 
-@body-bg:                           @spring-light-grey;
-@text-color:                        @spring-brown;
+@body-bg:                           @spring-brown;
+@text-color:                        @spring-green;
 @link-color:                        @spring-dark-green;
 @link-hover-color:                  @spring-dark-green;
 
@@ -30,7 +30,7 @@
 @navbar-default-link-hover-color:   @spring-light-grey;
 @navbar-default-link-hover-bg:      @spring-deep-red;
 @navbar-default-toggle-icon-bar-bg: @spring-light-grey;
-@navbar-default-toggle-hover-bg:    transparent;
+@navbar-default-toggle-hover-bg:    @spring-light-grey;
 @navbar-default-link-active-bg:     @spring-green;
 
 @border-radius-base:             0;
@@ -38,30 +38,30 @@
 @border-radius-small:            0;
 
 @btn-default-color:              @spring-light-grey;
-@btn-default-bg:                 @spring-brown;
+@btn-default-bg:                 @spring-grey;
 @btn-default-border:             @spring-green;
 
-@nav-tabs-active-link-hover-color:        @spring-light-grey;
-@nav-tabs-active-link-hover-bg:           @spring-brown;
-@nav-tabs-active-link-hover-border-color: @spring-brown;
-@nav-tabs-border-color:                   @spring-brown;
+@nav-tabs-active-link-hover-color:        @spring-brown;
+@nav-tabs-active-link-hover-bg:           @spring-light-grey;
+@nav-tabs-active-link-hover-border-color: @spring-light-grey;
+@nav-tabs-border-color:                   @spring-green;
 
-@pagination-active-bg:                    @spring-brown;
+@pagination-active-bg:                    @spring-green;
 @pagination-active-border:                @spring-green;
-@table-border-color:                      @spring-brown;
+@table-border-color:                      @spring-green;
 
 .table > thead > tr > th {
-  background-color: lighten(@spring-brown, 3%);
+  background-color: lighten(@spring-grey, 3%);
   color: @spring-light-grey;
 }
 
 .table-filter {
-  background-color: @spring-brown;
+  background-color: @spring-green;
   padding: 9px 12px;
 }
 
 .nav > li > a {
-  color: @spring-grey;
+  color: @spring-green;
 }
 
 .btn-default {
@@ -77,8 +77,8 @@
   &:active,
   &.active,
   .open .dropdown-toggle& {
-    background-color: @spring-brown;
-    border-color: @spring-brown;
+    background-color: @spring-green;
+    border-color: @spring-green;
   }
 }
 
@@ -127,7 +127,7 @@ h1 {
 
 .splash {
   background: @spring-green;
-  color: @spring-brown;
+  color: @spring-green;
   display: none;
 }
 
@@ -197,12 +197,12 @@ table td.action-column {
 }
 
 .container-details-table th {
-  background-color: lighten(@spring-brown, 3%);
-  color: @spring-light-grey;
+  background-color: lighten(@spring-grey, 3%);
+  color: @spring-green;
 }
 
 .status-help-content-table td {
-  color: @spring-brown;
+  color: @spring-green;
 }
 
 .alert-success {
@@ -232,7 +232,7 @@ table td.action-column {
 }
 
 hr {
-  border-top: 1px dotted @spring-brown;
+  border-top: 1px dotted @spring-grey;
 }
 
 #ownersTable th{
