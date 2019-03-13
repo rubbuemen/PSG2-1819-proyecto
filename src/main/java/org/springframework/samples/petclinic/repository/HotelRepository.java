@@ -18,12 +18,29 @@ package org.springframework.samples.petclinic.repository;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Hotel;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface HotelRepository {
 
     void save(Hotel hotel) throws DataAccessException;
 
     List<Hotel> findByPetId(Integer hotelId);
+    
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Hotel h where h.id=:hotelId")
+    void delete(@Param(value = "hotelId") int hotelId) throws DataAccessException;
+    
+    @Query("SELECT v FROM Hotel v where v.id=:hotelId")
+	Hotel findByHotelId(@Param(value = "hotelId") int hotelId) throws DataAccessException;
+
+	@Transactional
+	@Modifying
+	@Query("DELETE FROM Hotel v where v.pet.id=:petId")
+	void deleteAllHotelsByPetId(@Param(value = "petId") int petId) throws DataAccessException;
 
 }

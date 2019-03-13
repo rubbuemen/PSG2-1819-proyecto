@@ -132,5 +132,10 @@ public class Pet extends NamedEntity {
         getHotelsInternal().add(hotel);
         hotel.setPet(this);
     }
+    
+    public void deleteHotel(Hotel hotel) {
+        getHotelsInternal().remove(hotel);
+        hotel.setPet(this);
+    }
 
 }

@@ -131,4 +131,20 @@ public class ClinicServiceImpl implements ClinicService {
 		return hotelRepository.findByPetId(petId);
 	}
 
+	@Override
+	@Transactional
+	public void deleteHotel(int hotelId) throws DataAccessException{
+		hotelRepository.delete(hotelId);
+	}
+	
+	@Override
+	public Hotel findHotelById(int hotelId) {
+		return hotelRepository.findByHotelId(hotelId);
+	}
+	
+	@Override
+	public void deleteAllHotelsByPetId(int petId) throws DataAccessException {
+		this.hotelRepository.deleteAllHotelsByPetId(petId);
+		
+	}
 }
