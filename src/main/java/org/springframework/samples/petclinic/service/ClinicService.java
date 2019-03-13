@@ -52,7 +52,11 @@ public interface ClinicService {
 
 	void deletePet(Pet pet) throws DataAccessException;
 	
+	void deleteVisit(int visitId) throws DataAccessException;
+
+	Visit findVisitsById(int visitId) throws DataAccessException;
 	
+	void deleteAllVisitsByPetId(int petId) throws DataAccessException;
 
 
 }

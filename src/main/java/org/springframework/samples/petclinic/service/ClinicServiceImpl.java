@@ -115,5 +115,24 @@ public class ClinicServiceImpl implements ClinicService {
 	public void deletePet(Pet pet) throws DataAccessException{
 		petRepository.delete(pet.getId());
 	}
+	
+	@Override
+	@Transactional
+	public void deleteVisit(int visitId) throws DataAccessException{
+		visitRepository.delete(visitId);
+	}
+
+	@Override
+	public Visit findVisitsById(int visitId) {
+		
+		return visitRepository.findByVisitId(visitId);
+	}
+
+	@Override
+	public void deleteAllVisitsByPetId(int petId) throws DataAccessException {
+		this.visitRepository.deleteAllVisitsByPetId(petId);
+		
+	}
+
 
 }
