@@ -86,5 +86,18 @@ public class HotelController {
         model.put("hotels", this.clinicService.findPetById(petId).getHotels());
         return "hotelList";
     }
+    
+    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/{hotelId}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable("hotelId") int hotelId, @PathVariable("petId") int petId) {
+       
+        Pet pet=this.clinicService.findPetById(petId);
+        Hotel hotel=this.clinicService.findHotelById(hotelId);
+        pet.deleteHotel(hotel);
+        this.clinicService.savePet(pet);
+
+        this.clinicService.deleteHotel(hotelId);
+        return "redirect:/owners/{ownerId}";
+     
+    }
 
 }
