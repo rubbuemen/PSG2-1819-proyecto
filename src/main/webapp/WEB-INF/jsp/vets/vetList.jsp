@@ -26,6 +26,9 @@
                     </c:forEach>
                     <c:if test="${vet.nrOfSpecialties == 0}">none</c:if>
                 </td>
+                <td>
+                	<a class="btn btn-default" href="/vets/${vet.id}/delete"><fmt:message key="deleteVet"/></a>
+                </td>
             </tr>
         </c:forEach>
         </tbody>
