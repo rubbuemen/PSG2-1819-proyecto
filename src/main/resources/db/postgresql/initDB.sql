@@ -88,6 +88,7 @@ CREATE TABLE IF NOT EXISTS hotels (
   pet_id INT NOT NULL,
   details VARCHAR(255),
   start_date_book DATE,
+  end_date_book DATE,
   FOREIGN KEY (pet_id) REFERENCES pets(id),
   CONSTRAINT pk_hotels PRIMARY KEY (id)
 );

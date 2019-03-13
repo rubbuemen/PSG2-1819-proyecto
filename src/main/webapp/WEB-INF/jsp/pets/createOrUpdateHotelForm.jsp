@@ -11,6 +11,7 @@
         <script>
             $(function () {
                 $("#startDate").datepicker({dateFormat: 'yy/mm/dd'});
+                $("#endDate").datepicker({dateFormat: 'yy/mm/dd'});
             });
         </script>
     </jsp:attribute>
@@ -39,8 +40,10 @@
             <div class="form-group has-feedback">
             	<fmt:message var="details" key="details"/>
             	<fmt:message var="startDate" key="startDate"/>
+            	<fmt:message var="endDate" key="endDate"/>
                 <petclinic:inputField label="${details}" name="details"/>
                 <petclinic:inputField label="${startDate}" name="startDate"/>
+                <petclinic:inputField label="${endDate}" name="endDate"/>
             </div>
 
             <div class="form-group">
@@ -57,12 +60,14 @@
             <tr>
             	<th><fmt:message key="details"/></th>
                 <th><fmt:message key="startDate"/></th>
+                <th><fmt:message key="endDate"/></th>
             </tr>
             <c:forEach var="hotel" items="${hotel.pet.hotels}">
                 <c:if test="${!hotel['new']}">
                     <tr>
                      	<td><c:out value="${hotel.details}"/></td>
                         <td><petclinic:localDate date="${hotel.startDate}" pattern="yyyy/MM/dd"/></td>
+                        <td><petclinic:localDate date="${hotel.endDate}" pattern="yyyy/MM/dd"/></td>
                     </tr>
                 </c:if>
             </c:forEach>

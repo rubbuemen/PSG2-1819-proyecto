@@ -96,12 +96,14 @@
                         <tr>
                         	<th><fmt:message key="details"/></th>
                             <th><fmt:message key="startDate"/></th>
+                            <th><fmt:message key="endDate"/></th>
                         </tr>
                         </thead>
                         <c:forEach var="hotel" items="${pet.hotels}">
                             <tr>
                            		<td><c:out value="${hotel.details}"/></td>
                                 <td><petclinic:localDate date="${hotel.startDate}" pattern="yyyy-MM-dd"/></td>
+                                <td><petclinic:localDate date="${hotel.endDate}" pattern="yyyy-MM-dd"/></td>
                             </tr>
                         </c:forEach>
                         <tr>
