@@ -64,12 +64,20 @@
                         <tr>
                             <th><fmt:message key="visitDay"/></th>
                             <th><fmt:message key="description"/></th>
+                  
                         </tr>
                         </thead>
                         <c:forEach var="visit" items="${pet.visits}">
                             <tr>
                                 <td><petclinic:localDate date="${visit.date}" pattern="yyyy-MM-dd"/></td>
                                 <td><c:out value="${visit.description}"/></td>
+                                <td><spring:url value="/owners/{ownerId}/pets/{petId}/visits/{visitId}/delete" var="visitUrl">
+                                	<spring:param name="ownerId" value="${owner.id}"/>
+                                    <spring:param name="petId" value="${pet.id}"/>
+                                    <spring:param name="visitId" value="${visit.id}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(visitUrl)}"><fmt:message key="deleteVisit"/></a>
+                                </td>
                             </tr>
                         </c:forEach>
                         <tr>

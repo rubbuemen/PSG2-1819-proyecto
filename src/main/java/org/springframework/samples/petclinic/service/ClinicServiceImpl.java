@@ -133,6 +133,25 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional
+	public void deleteVisit(int visitId) throws DataAccessException{
+		visitRepository.delete(visitId);
+	}
+
+	@Override
+	public Visit findVisitsById(int visitId) {
+		
+		return visitRepository.findByVisitId(visitId);
+	}
+
+	@Override
+	public void deleteAllVisitsByPetId(int petId) throws DataAccessException {
+		this.visitRepository.deleteAllVisitsByPetId(petId);
+		
+	}
+
+
+	@Override
+	@Transactional
 	public void deleteHotel(int hotelId) throws DataAccessException{
 		hotelRepository.delete(hotelId);
 	}

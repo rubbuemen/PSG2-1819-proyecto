@@ -52,7 +52,7 @@ public interface ClinicService {
 	Collection<Visit> findVisitsByPetId(int petId);
 
 	void deletePet(Pet pet) throws DataAccessException;
-	
+
     void saveHotel(Hotel hotel) throws DataAccessException;
     
     Collection<Hotel> findHotelsByPetId(int petId);
@@ -62,6 +62,12 @@ public interface ClinicService {
 	Hotel findHotelById(int hotelId) throws DataAccessException;
 	
 	void deleteAllHotelsByPetId(int petId) throws DataAccessException;
+
+	void deleteVisit(int visitId) throws DataAccessException;
+
+	Visit findVisitsById(int visitId) throws DataAccessException;
+	
+	void deleteAllVisitsByPetId(int petId) throws DataAccessException;
 
 
 }

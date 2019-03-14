@@ -115,6 +115,7 @@ public class PetController {
         Owner ow = this.clinicService.findOwnerById(ownerId);
         Pet p = this.clinicService.findPetById(petId);
         this.clinicService.deleteAllHotelsByPetId(petId);
+        this.clinicService.deleteAllVisitsByPetId(petId);
         ow.deletePet(p);
         this.clinicService.deletePet(p);
         return "redirect:/owners/{ownerId}";
