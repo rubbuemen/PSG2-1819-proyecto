@@ -90,6 +90,40 @@
                         </tr>
                     </table>
                 </td>
+                <td valign="top">
+                    <table class="table-condensed">
+                        <thead>
+                        <tr>
+                        	<th><fmt:message key="details"/></th>
+                            <th><fmt:message key="startDate"/></th>
+                            <th><fmt:message key="endDate"/></th>
+                        </tr>
+                        </thead>
+                        <c:forEach var="hotel" items="${pet.hotels}">
+                            <tr>
+                           		<td><c:out value="${hotel.details}"/></td>
+                                <td><petclinic:localDate date="${hotel.startDate}" pattern="yyyy-MM-dd"/></td>
+                                <td><petclinic:localDate date="${hotel.endDate}" pattern="yyyy-MM-dd"/></td>
+                                <td><spring:url value="/owners/{ownerId}/pets/{petId}/hotels/{hotelId}/delete" var="hotelUrl">
+                                	<spring:param name="ownerId" value="${owner.id}"/>
+                                    <spring:param name="petId" value="${pet.id}"/>
+                                    <spring:param name="hotelId" value="${hotel.id}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(hotelUrl)}"><fmt:message key="deleteRoom"/></a>
+                                </td>
+                            </tr>
+                        </c:forEach>
+                        <tr>
+                            <td>
+                                <spring:url value="/owners/{ownerId}/pets/{petId}/hotels/new" var="hotelUrl">
+                                    <spring:param name="ownerId" value="${owner.id}"/>
+                                    <spring:param name="petId" value="${pet.id}"/>
+                                </spring:url>
+                                <a href="${fn:escapeXml(hotelUrl)}"><fmt:message key="addRoom"/></a>
+                            </td>
+                        </tr>
+                    </table>
+                </td>
             </tr>
 
         </c:forEach>
