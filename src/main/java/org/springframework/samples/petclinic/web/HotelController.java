@@ -17,16 +17,13 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
+import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Pet;
-import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -35,20 +32,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-/**
- * @author Juergen Hoeller
- * @author Ken Krebs
- * @author Arjen Poutsma
- * @author Michael Isvy
- */
 @Controller
-public class VisitController {
+public class HotelController {
 
     private final ClinicService clinicService;
 
 
     @Autowired
-    public VisitController(ClinicService clinicService) {
+    public HotelController(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
 
@@ -67,46 +58,44 @@ public class VisitController {
      * @param petId
      * @return Pet
      */
-    @ModelAttribute("visit")
-    public Visit loadPetWithVisit(@PathVariable("petId") int petId) {
+    @ModelAttribute("hotel")
+    public Hotel loadPetWithHotel(@PathVariable("petId") int petId) {
         Pet pet = this.clinicService.findPetById(petId);
-        Visit visit = new Visit();
-        pet.addVisit(visit);
-        return visit;
+        Hotel hotel = new Hotel();
+        pet.addHotel(hotel);
+        return hotel;
     }
 
-    // Spring MVC calls method loadPetWithVisit(...) before initNewVisitForm is called
-    @RequestMapping(value = "/owners/*/pets/{petId}/visits/new", method = RequestMethod.GET)
-    public String initNewVisitForm(@PathVariable("petId") int petId, Map<String, Object> model) {
-        return "pets/createOrUpdateVisitForm";
+    @RequestMapping(value = "/owners/*/pets/{petId}/hotels/new", method = RequestMethod.GET)
+    public String initNewHotelForm(@PathVariable("petId") int petId, Map<String, Object> model) {
+        return "pets/createOrUpdateHotelForm";
     }
 
-    // Spring MVC calls method loadPetWithVisit(...) before processNewVisitForm is called
-    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/visits/new", method = RequestMethod.POST)
-    public String processNewVisitForm(@Valid Visit visit, BindingResult result) {
+    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/new", method = RequestMethod.POST)
+    public String processNewHotelForm(@Valid Hotel hotel, BindingResult result) {
         if (result.hasErrors()) {
-            return "pets/createOrUpdateVisitForm";
+            return "pets/createOrUpdateHotelForm";
         } else {
-            this.clinicService.saveVisit(visit);
+            this.clinicService.saveHotel(hotel);
             return "redirect:/owners/{ownerId}";
         }
     }
 
-    @RequestMapping(value = "/owners/*/pets/{petId}/visits", method = RequestMethod.GET)
-    public String showVisits(@PathVariable int petId, Map<String, Object> model) {
-        model.put("visits", this.clinicService.findPetById(petId).getVisits());
-        return "visitList";
+    @RequestMapping(value = "/owners/*/pets/{petId}/hotels", method = RequestMethod.GET)
+    public String showHotels(@PathVariable int petId, Map<String, Object> model) {
+        model.put("hotels", this.clinicService.findPetById(petId).getHotels());
+        return "hotelList";
     }
     
-    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/visits/{visitId}/delete", method = RequestMethod.GET)
-    public String delete(@PathVariable("visitId") int visitId, @PathVariable("petId") int petId) {
+    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/{hotelId}/delete", method = RequestMethod.GET)
+    public String delete(@PathVariable("hotelId") int hotelId, @PathVariable("petId") int petId) {
        
         Pet pet=this.clinicService.findPetById(petId);
-        Visit visit=this.clinicService.findVisitsById(visitId);
-        pet.deleteVisit(visit);
+        Hotel hotel=this.clinicService.findHotelById(hotelId);
+        pet.deleteHotel(hotel);
         this.clinicService.savePet(pet);
 
-        this.clinicService.deleteVisit(visitId);
+        this.clinicService.deleteHotel(hotelId);
         return "redirect:/owners/{ownerId}";
      
     }
