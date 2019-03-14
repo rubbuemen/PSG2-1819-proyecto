@@ -100,13 +100,10 @@ public class VetController {
     }
 
     @RequestMapping(value = "/vets/new", method = RequestMethod.POST)
-    public String processCreationForm(List<Specialty> specialties, @Valid Vet vet, BindingResult result) {
+    public String processCreationForm(@Valid Vet vet, BindingResult result) {
         if (result.hasErrors()) {
             return VIEWS_VET_CREATE_OR_UPDATE_FORM;
         } else {
-        	for (Specialty specialty : specialties) {
-				vet.addSpecialty(specialty);
-			}
             this.clinicService.saveVet(vet);
             return "redirect:/vets/" + vet.getId();
         }
@@ -120,13 +117,10 @@ public class VetController {
     }
 
     @RequestMapping(value = "/vets/{vetId}/edit", method = RequestMethod.POST)
-    public String processUpdateOwnerForm(List<Specialty> specialties, @Valid Vet vet, BindingResult result, @PathVariable("vetId") int vetId) {
+    public String processUpdateOwnerForm(@Valid Vet vet, BindingResult result, @PathVariable("vetId") int vetId) {
         if (result.hasErrors()) {
             return VIEWS_VET_CREATE_OR_UPDATE_FORM;
         } else {
-        	for (Specialty specialty : specialties) {
-				vet.addSpecialty(specialty);
-			}
             vet.setId(vetId);
             this.clinicService.saveVet(vet);
             return "redirect:/vets/{vetId}";
