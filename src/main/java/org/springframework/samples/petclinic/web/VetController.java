@@ -15,11 +15,17 @@
  */
 package org.springframework.samples.petclinic.web;
 
+import java.util.Collection;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.samples.petclinic.model.Owner;
+import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Vets;
 import org.springframework.samples.petclinic.service.ClinicService;
@@ -27,6 +33,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -50,8 +57,13 @@ public class VetController {
     public VetController(ClinicService clinicService) {
         this.clinicService = clinicService;
     }
+    
+    @ModelAttribute("specialties")
+    public Collection<Specialty> populateSpecialities() {
+        return this.clinicService.findVetSpecialities();
+    }
 
-    @RequestMapping(value = { "/vets.html"})
+    @RequestMapping(value = { "/vets"})
     public String showVetList(Map<String, Object> model) {
         // Here we are returning an object of type 'Vets' rather than a collection of Vet objects
         // so it is simpler for Object-Xml mapping
@@ -76,7 +88,7 @@ public class VetController {
     public String delete(@PathVariable("vetId") int vetId, ModelMap model) {
         Vet v = this.clinicService.findVetById(vetId);
         this.clinicService.deleteVet(v);
-        return "redirect:/vets/{vetId}";
+        return "redirect:/vets";
      
     }
 
@@ -88,10 +100,13 @@ public class VetController {
     }
 
     @RequestMapping(value = "/vets/new", method = RequestMethod.POST)
-    public String processCreationForm(@Valid Vet vet, BindingResult result) {
+    public String processCreationForm(List<Specialty> specialties, @Valid Vet vet, BindingResult result) {
         if (result.hasErrors()) {
             return VIEWS_VET_CREATE_OR_UPDATE_FORM;
         } else {
+        	for (Specialty specialty : specialties) {
+				vet.addSpecialty(specialty);
+			}
             this.clinicService.saveVet(vet);
             return "redirect:/vets/" + vet.getId();
         }
@@ -105,10 +120,13 @@ public class VetController {
     }
 
     @RequestMapping(value = "/vets/{vetId}/edit", method = RequestMethod.POST)
-    public String processUpdateOwnerForm(@Valid Vet vet, BindingResult result, @PathVariable("vetId") int vetId) {
+    public String processUpdateOwnerForm(List<Specialty> specialties, @Valid Vet vet, BindingResult result, @PathVariable("vetId") int vetId) {
         if (result.hasErrors()) {
             return VIEWS_VET_CREATE_OR_UPDATE_FORM;
         } else {
+        	for (Specialty specialty : specialties) {
+				vet.addSpecialty(specialty);
+			}
             vet.setId(vetId);
             this.clinicService.saveVet(vet);
             return "redirect:/vets/{vetId}";

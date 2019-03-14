@@ -15,10 +15,12 @@
         
       		<fmt:message var="firstName" key="firstName"/>
       		<fmt:message var="lastName" key="lastName"/>
-      		<fmt:message var="specialties" key="specialties"/>
+      		<fmt:message var="specialty" key="specialties"/>
             <petclinic:inputField label="${firstName}" name="firstName"/>
             <petclinic:inputField label="${lastName}" name="lastName"/>
-            <petclinic:inputField label="${specialties}" name="specialties"/>
+            <div class="control-group">
+                    <petclinic:selectField name="specialties" label="${specialty}" names="${specialties}" size="5" multiple="true"/>
+            </div>
             
         </div>
         <div class="form-group">
@@ -34,11 +36,4 @@
             </div>
         </div>
     </form:form>
-    	<div class="form-group">
-                <div class="col-sm-offset-2 col-sm-10">
-					<c:if test="${!vet['new']}">
-						<a class="btn btn-default" href="/vets/${vet.id}/delete"><fmt:message key="deleteVet"/></a>
-					</c:if>
-                </div>
-            </div>
 </petclinic:layout>

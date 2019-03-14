@@ -24,6 +24,7 @@ import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.PetType;
+import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.repository.HotelRepository;
@@ -102,8 +103,7 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 
 	@Override
-	@Transactional(readOnly = true)
-	@Cacheable(value = "vets")
+	@Transactional
 	public Collection<Vet> findVets() throws DataAccessException {
 		return vetRepository.findAll();
 	}
@@ -184,6 +184,12 @@ public class ClinicServiceImpl implements ClinicService {
 	@Transactional
 	public void deleteVet(Vet vet) throws DataAccessException {
 		vetRepository.delete(vet.getId());
+	}
+	
+	@Override
+	@Transactional(readOnly = true)
+	public Collection<Specialty> findVetSpecialities() throws DataAccessException {
+		return vetRepository.findVetSpecialities();
 	}
 
 }
