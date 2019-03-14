@@ -167,5 +167,17 @@ public class ClinicServiceImpl implements ClinicService {
 	public void deleteOwner(Owner owner) throws DataAccessException {
 		ownerRepository.delete(owner.getId());
 	}
+	
+	@Transactional(readOnly = true)
+	public Vet findVetById(int id) throws DataAccessException {
+		return vetRepository.findById(id);
+	}
+
+	
+	@Override
+	@Transactional
+	public void saveVet(Vet vet) throws DataAccessException {
+		vetRepository.save(vet);
+	}
 
 }

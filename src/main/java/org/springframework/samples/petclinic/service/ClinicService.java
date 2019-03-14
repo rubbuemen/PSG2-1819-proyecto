@@ -36,16 +36,20 @@ public interface ClinicService {
     Collection<PetType> findPetTypes() throws DataAccessException;
 
     Owner findOwnerById(int id) throws DataAccessException;
+    
+    Vet findVetById(int id) throws DataAccessException;
 
     Pet findPetById(int id) throws DataAccessException;
 
     void savePet(Pet pet) throws DataAccessException;
 
     void saveVisit(Visit visit) throws DataAccessException;
+    
+	void saveVet(Vet vet) throws DataAccessException;
+	
+    void saveOwner(Owner owner) throws DataAccessException;
 
     Collection<Vet> findVets() throws DataAccessException;
-
-    void saveOwner(Owner owner) throws DataAccessException;
 
     Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException;
 
