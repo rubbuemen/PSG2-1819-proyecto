@@ -139,8 +139,13 @@ public class OwnerController {
     @RequestMapping(value = "/owners/{ownerId}/delete", method = RequestMethod.GET)
     public String delete(@PathVariable("ownerId") int ownerId, ModelMap model) {
         Owner owner = this.clinicService.findOwnerById(ownerId);
+    	List<Pet> pets = new ArrayList<>();
+        pets = owner.getPets();
+        for (Pet pet : pets) {
+			this.clinicService.deletePet(pet);
+		}
         this.clinicService.deleteOwner(owner);
-        return "redirect:/";    
+        return "redirect:/owners";    
     }
     
 }
