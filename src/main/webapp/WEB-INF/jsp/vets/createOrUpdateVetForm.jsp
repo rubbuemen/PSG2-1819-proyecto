@@ -34,4 +34,11 @@
             </div>
         </div>
     </form:form>
+    	<div class="form-group">
+                <div class="col-sm-offset-2 col-sm-10">
+					<c:if test="${!vet['new']}">
+						<a class="btn btn-default" href="/vets/${vet.id}/delete"><fmt:message key="deleteVet"/></a>
+					</c:if>
+                </div>
+            </div>
 </petclinic:layout>

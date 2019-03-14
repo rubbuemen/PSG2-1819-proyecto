@@ -60,7 +60,7 @@ public interface ClinicService {
     void saveHotel(Hotel hotel) throws DataAccessException;
     
     Collection<Hotel> findHotelsByPetId(int petId);
-	
+
     void deleteHotel(int hotelId) throws DataAccessException;
 
 	Hotel findHotelById(int hotelId) throws DataAccessException;
@@ -70,6 +70,8 @@ public interface ClinicService {
 	void deleteVisit(int visitId) throws DataAccessException;
 
 	Visit findVisitsById(int visitId) throws DataAccessException;
+	
+	void deleteVet(Vet vet) throws DataAccessException;
 	
 	void deleteAllVisitsByPetId(int petId) throws DataAccessException;
 
