@@ -69,5 +69,6 @@ public interface ClinicService {
 	
 	void deleteAllVisitsByPetId(int petId) throws DataAccessException;
 
+	void deleteOwner(Owner owner) throws DataAccessException;
 
 }

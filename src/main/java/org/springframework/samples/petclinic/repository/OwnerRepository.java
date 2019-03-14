@@ -18,8 +18,12 @@ package org.springframework.samples.petclinic.repository;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Owner;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repository class for <code>Owner</code> domain objects All method names are compliant with Spring Data naming
@@ -60,5 +64,9 @@ public interface OwnerRepository {
      */
     void save(Owner owner) throws DataAccessException;
 
+    @Transactional
+    @Modifying
+    @Query("DELETE FROM Owner o where o.id=:ownerId")
+    void delete(@Param(value = "ownerId") int ownerId) throws DataAccessException;
 
 }
