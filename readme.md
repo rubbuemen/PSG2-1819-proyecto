@@ -10,7 +10,7 @@
 | Day 5         |    :fearful:   (I´m desperate, I need help)        |
 
 
-## Sprint Template
+## Sprint 1
 
 | Day           | [Rubén]       | [Iván]         | [Tomás]        | [Manuel]       | [Javier]       | [Alberto]      |
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
