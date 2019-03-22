@@ -18,6 +18,7 @@ package org.springframework.samples.petclinic.service;
 import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
+import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
@@ -79,5 +80,11 @@ public interface ClinicService {
 	void deleteOwner(Owner owner) throws DataAccessException;
 	
 	Collection<Specialty> findVetSpecialities() throws DataAccessException;
+	
+	void saveCause(Cause cause) throws DataAccessException;
+	
+	Cause findCauseById(int causeId) throws DataAccessException;
+	
+	Collection<Cause> findCauses() throws DataAccessException;
 
 }

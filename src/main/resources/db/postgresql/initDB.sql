@@ -94,3 +94,13 @@ CREATE TABLE IF NOT EXISTS hotels (
 );
 
 ALTER SEQUENCE hotels_id_seq RESTART WITH 100;
+
+CREATE TABLE IF NOT EXISTS causes (
+  id SERIAL,
+  name VARCHAR(30),
+  description VARCHAR(255),
+  budged_target DOUBLE NOT NULL,
+  organization VARCHAR(30),
+  is_closed BOOLEAN,
+  CONSTRAINT pk_causes PRIMARY KEY (id)
+);

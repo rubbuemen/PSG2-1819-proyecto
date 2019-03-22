@@ -6,6 +6,7 @@ DROP TABLE hotels IF EXISTS;
 DROP TABLE pets IF EXISTS;
 DROP TABLE types IF EXISTS;
 DROP TABLE owners IF EXISTS;
+DROP TABLE causes IF EXISTS;
 
 
 CREATE TABLE vets (
@@ -73,3 +74,14 @@ CREATE TABLE hotels (
 );
 ALTER TABLE hotels ADD CONSTRAINT fk_hotels_pets FOREIGN KEY (pet_id) REFERENCES pets (id);
 CREATE INDEX hotels_pet_id ON hotels (pet_id);
+
+CREATE TABLE causes (
+  id         INTEGER IDENTITY PRIMARY KEY,
+  name VARCHAR(30),
+  description VARCHAR(255),
+  budged_target DOUBLE NOT NULL,
+  organization VARCHAR(30),
+  is_closed BOOLEAN
+);
+
+CREATE INDEX causes_name ON causes (name);
