@@ -1,5 +1,5 @@
 # Niko Niko Calendar of team G2-23
-### Sprint 3: L3-Measurement 
+### Ejemplos de caritas (lo borraré al entregar)
 
 | Day           | J. A. Parejo  |
 | ------------- | ------------- |
@@ -10,7 +10,7 @@
 | Day 5         |    :fearful:   (I´m desperate, I need help)        |
 
 
-## Sprint 1
+## Sprint 2: L3-Measurement 
 
 | Day           | [Rubén]       | [Iván]         | [Tomás]        | [Manuel]       | [Javier]       | [Alberto]      |
 | ------------- | ------------- | -------------  | -------------  | -------------  | -------------  | -------------  |
