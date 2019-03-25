@@ -147,4 +147,9 @@ public class ClinicServiceImpl implements ClinicService {
 		this.hotelRepository.deleteAllHotelsByPetId(petId);
 		
 	}
+
+	
+
+
+	
 }

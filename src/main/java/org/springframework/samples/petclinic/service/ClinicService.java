@@ -62,6 +62,9 @@ public interface ClinicService {
 	Hotel findHotelById(int hotelId) throws DataAccessException;
 	
 	void deleteAllHotelsByPetId(int petId) throws DataAccessException;
+	
+	
+	
 
 
 }
