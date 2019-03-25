@@ -104,3 +104,13 @@ CREATE TABLE IF NOT EXISTS causes (
   is_closed BOOLEAN,
   CONSTRAINT pk_causes PRIMARY KEY (id)
 );
+
+CREATE TABLE IF NOT EXISTS donations (
+  id SERIAL,
+  client VARCHAR(30),
+  date_of_donation DATE,
+  amount DOUBLE NOT NULL,
+  cause_id INT NOT NULL,
+  FOREIGN KEY (cause_id) REFERENCES donations(id),
+  CONSTRAINT pk_donations PRIMARY KEY (id)
+);

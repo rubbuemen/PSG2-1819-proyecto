@@ -20,9 +20,13 @@
 			<c:forEach items="${causes}" var="cause">
 				<tr>
 					<td><spring:url value="/causes/{causeId}.html" var="causeUrl">
-							<spring:param name="causeId" value="${cause.id}" />
+						<spring:param name="causeId" value="${cause.id}" />
 						</spring:url>
-						<c:out value="${cause.name}" /></td>
+						<c:out value="${cause.name}" /> </td>
+						<td><spring:url value="/causes/{causeId}/donations/new.html" var="addUrl">
+       						<spring:param name="causeId" value="${cause.id}"/>
+   						</spring:url>
+    					<a href="${fn:escapeXml(addUrl)}" class="btn btn-default"><fmt:message key="addDonation"/></a></td>
 				</tr>
 			</c:forEach>
 		</tbody>

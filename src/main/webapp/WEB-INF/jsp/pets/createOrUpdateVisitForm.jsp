@@ -31,7 +31,7 @@
                 <td><c:out value="${visit.pet.name}"/></td>
                 <td><petclinic:localDate date="${visit.pet.birthDate}" pattern="yyyy/MM/dd"/></td>
                 <td><c:out value="${visit.pet.type.name}"/></td>
-                <td><c:out value="${visit.pet.owner.firstName} ${visit.pet.owner.lastName}"/></td>
+                <td><c:out value="${visit.pet.owner'.firstName} ${visit.pet.owner.lastName}"/></td>
             </tr>
         </table>
 

@@ -20,6 +20,7 @@ import java.util.Collection;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
@@ -28,6 +29,7 @@ import org.springframework.samples.petclinic.model.Specialty;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.repository.CauseRepository;
+import org.springframework.samples.petclinic.repository.DonationRepository;
 import org.springframework.samples.petclinic.repository.HotelRepository;
 import org.springframework.samples.petclinic.repository.OwnerRepository;
 import org.springframework.samples.petclinic.repository.PetRepository;
@@ -51,16 +53,18 @@ public class ClinicServiceImpl implements ClinicService {
 	private VisitRepository visitRepository;
 	private HotelRepository hotelRepository;
 	private CauseRepository causeRepository;
+	private DonationRepository donationRepository;
 
 	@Autowired
 	public ClinicServiceImpl(PetRepository petRepository, VetRepository vetRepository, OwnerRepository ownerRepository,
-			VisitRepository visitRepository, HotelRepository hotelRepository, CauseRepository causeRepository) {
+			VisitRepository visitRepository, HotelRepository hotelRepository, CauseRepository causeRepository, DonationRepository donationRepository) {
 		this.petRepository = petRepository;
 		this.vetRepository = vetRepository;
 		this.ownerRepository = ownerRepository;
 		this.visitRepository = visitRepository;
 		this.hotelRepository = hotelRepository;
 		this.causeRepository = causeRepository;
+		this.donationRepository = donationRepository;
 	}
 
 	@Override
@@ -212,6 +216,26 @@ public class ClinicServiceImpl implements ClinicService {
 	@Transactional
 	public Collection<Cause> findCauses() throws DataAccessException {
 		return causeRepository.findAll();
+	}
+
+	@Override
+	public Donation findByDonationId(int donationId) throws DataAccessException {
+		return donationRepository.findByDonationId(donationId);
+	}
+
+	@Override
+	public void saveDonation(Donation donation) throws DataAccessException {
+		donationRepository.save(donation);
+	}
+
+	@Override
+	public Double totalBudget(int causeId) throws DataAccessException {
+		return causeRepository.totalBudget(causeId);
+	}
+
+	@Override
+	public Collection<Donation> findDonations(int causeId) throws DataAccessException {
+		return causeRepository.findDonations(causeId);
 	}
 
 }

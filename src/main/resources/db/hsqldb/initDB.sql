@@ -7,6 +7,7 @@ DROP TABLE pets IF EXISTS;
 DROP TABLE types IF EXISTS;
 DROP TABLE owners IF EXISTS;
 DROP TABLE causes IF EXISTS;
+DROP TABLE donations IF EXISTS;
 
 
 CREATE TABLE vets (
@@ -82,6 +83,16 @@ CREATE TABLE causes (
   budged_target DOUBLE NOT NULL,
   organization VARCHAR(30),
   is_closed BOOLEAN
+  
 );
-
 CREATE INDEX causes_name ON causes (name);
+
+CREATE TABLE donations (
+  id         INTEGER IDENTITY PRIMARY KEY,
+  client     VARCHAR(30),
+  date_of_donation DATE,
+  amount	 DOUBLE NOT NULL,
+  cause_id    INTEGER NOT NULL,
+);
+ALTER TABLE donations ADD CONSTRAINT fk_donations_causes FOREIGN KEY (cause_id) REFERENCES causes (id);
+CREATE INDEX donations_client ON donations (client);
