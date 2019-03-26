@@ -13,26 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.repository.springdatajpa;
+package org.springframework.samples.petclinic.repository;
 
-import java.util.List;
+import java.util.Collection;
 
 import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.Repository;
-import org.springframework.samples.petclinic.model.Specialty;
-import org.springframework.samples.petclinic.model.Vet;
-import org.springframework.samples.petclinic.repository.VetRepository;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.model.Cause;
 
-/**
- * Spring Data JPA specialization of the {@link VetRepository} interface
- *
- * @author Michael Isvy
- * @since 15.1.2013
- */
-public interface SpringDataVetRepository extends VetRepository, Repository<Vet, Integer> {
-	
-	@Override
-    @Query("SELECT vspecialty FROM Specialty vspecialty ORDER BY vspecialty.name")
-    List<Specialty> findVetSpecialities() throws DataAccessException;
+public interface CauseRepository {
+
+    void save(Cause cause) throws DataAccessException;
+    
+    @Query("SELECT c FROM Cause c where c.id=:causeId")
+	Cause findByCauseId(@Param(value = "causeId") int causeId) throws DataAccessException;
+    
+    Collection<Cause> findAll() throws DataAccessException;
+    
 }
