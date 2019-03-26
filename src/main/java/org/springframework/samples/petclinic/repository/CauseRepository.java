@@ -21,6 +21,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Donation;
 
 public interface CauseRepository {
 
@@ -28,6 +29,12 @@ public interface CauseRepository {
     
     @Query("SELECT c FROM Cause c where c.id=:causeId")
 	Cause findByCauseId(@Param(value = "causeId") int causeId) throws DataAccessException;
+	
+	@Query("SELECT sum(d.amount) FROM Donation d where d.cause.id=:causeId")
+    Double totalBudget(@Param(value = "causeId") int causeId) throws DataAccessException;
+    
+    @Query("SELECT d FROM Donation d where d.cause.id=:causeId")
+    Collection<Donation> findDonations(@Param(value = "causeId") int causeId) throws DataAccessException;
     
     Collection<Cause> findAll() throws DataAccessException;
     
