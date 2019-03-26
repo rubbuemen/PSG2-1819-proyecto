@@ -74,7 +74,7 @@ public class CauseController {
     @RequestMapping("/causes/{causeId}")
     public ModelAndView showCause(@PathVariable("causeId") int causeId) {
         ModelAndView mav = new ModelAndView("causes/causeDetails");
-        mav.addObject(this.clinicService.findCauseById(causeId));
+        mav.addObject("cause",this.clinicService.findCauseById(causeId));
         return mav;
     }
 

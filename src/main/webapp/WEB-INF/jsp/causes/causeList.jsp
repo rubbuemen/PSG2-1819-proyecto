@@ -45,6 +45,7 @@
     			</spring:url>
    				<a href="${fn:escapeXml(detailsUrl)}" class="btn btn-default"><fmt:message key="causeDetails"/></a>
 				</td>
+				</c:if>
 				</tr>
 				</c:forEach>
 			</c:forEach>
