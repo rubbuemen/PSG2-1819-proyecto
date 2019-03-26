@@ -15,20 +15,10 @@
  */
 package org.springframework.samples.petclinic.repository.springdatajpa;
 
-
 import org.springframework.data.repository.Repository;
+import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.repository.CauseRepository;
 
-import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.repository.VisitRepository;
-
-
-/**
- * Spring Data JPA specialization of the {@link VisitRepository} interface
- *
- * @author Michael Isvy
- * @since 15.1.2013
- */
-public interface SpringDataVisitRepository extends VisitRepository, Repository<Visit, Integer> {
-
-	   
+public interface SpringDataCauseRepository extends CauseRepository, Repository<Cause, Integer> {
+	
 }

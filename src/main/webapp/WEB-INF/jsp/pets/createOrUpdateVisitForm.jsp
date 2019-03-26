@@ -37,8 +37,11 @@
 
         <form:form modelAttribute="visit" class="form-horizontal">
             <div class="form-group has-feedback">
-                <petclinic:inputField label="Date" name="date"/>
-                <petclinic:inputField label="Description" name="description"/>
+            
+            	<fmt:message var="date" key="date"/>
+            	<fmt:message var="description" key="description"/>
+                <petclinic:inputField label="${date}" name="date"/>
+                <petclinic:inputField label="${description}" name="description"/>
             </div>
 
             <div class="form-group">
