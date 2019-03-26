@@ -19,7 +19,7 @@
 | Day 3         |    :smiley:   |                |                |                |                |                |
 | Day 4         |               |                |                |                |                |                |
 | Day 5         |    :smiley:   | :neutral_face: |                |                |                |                |
-| Day 6         |               |                |                |                |                |                |
+| Day 6         |               |                |                |                |    :smiley:    |                |
 | Day 7         |               |                |                |                |                |                |
 | Day 8         |               |                |                |                |                |                |
 | Day 9         |               |                |                |                |                |                |
