@@ -27,13 +27,10 @@
                         <c:out value="${pet.owner.firstName} ${pet.owner.lastName}"/>
                     </div>
                 </div>
-                <fmt:message var="name" key="name"/>
-                <fmt:message var="birthDate" key="birthDate"/>
-                <fmt:message var="type" key="type"/>
-                <petclinic:inputField label="${name}" name="name"/>
-                <petclinic:inputField label="${birthDate}" name="birthDate"/>
+                <petclinic:inputField label="Name" name="name"/>
+                <petclinic:inputField label="Birth Date" name="birthDate"/>
                 <div class="control-group">
-                    <petclinic:selectField name="type" label="${type}" names="${types}" size="5"/>
+                    <petclinic:selectField name="type" label="Type " names="${types}" size="5"/>
                 </div>
             </div>
             <div class="form-group">

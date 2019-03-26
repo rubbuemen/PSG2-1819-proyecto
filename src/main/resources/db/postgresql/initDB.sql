@@ -82,25 +82,3 @@ CREATE TABLE IF NOT EXISTS visits (
 );
 
 ALTER SEQUENCE visits_id_seq RESTART WITH 100;
-
-CREATE TABLE IF NOT EXISTS hotels (
-  id SERIAL,
-  pet_id INT NOT NULL,
-  details VARCHAR(255),
-  start_date_book DATE,
-  end_date_book DATE,
-  FOREIGN KEY (pet_id) REFERENCES pets(id),
-  CONSTRAINT pk_hotels PRIMARY KEY (id)
-);
-
-ALTER SEQUENCE hotels_id_seq RESTART WITH 100;
-
-CREATE TABLE IF NOT EXISTS causes (
-  id SERIAL,
-  name VARCHAR(30),
-  description VARCHAR(255),
-  budged_target DOUBLE NOT NULL,
-  organization VARCHAR(30),
-  is_closed BOOLEAN,
-  CONSTRAINT pk_causes PRIMARY KEY (id)
-);

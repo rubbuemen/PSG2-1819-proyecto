@@ -17,16 +17,13 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.Map;
 
-
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
 import org.springframework.samples.petclinic.model.Pet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.stereotype.Controller;
-
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -96,19 +93,6 @@ public class VisitController {
     public String showVisits(@PathVariable int petId, Map<String, Object> model) {
         model.put("visits", this.clinicService.findPetById(petId).getVisits());
         return "visitList";
-    }
-    
-    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/visits/{visitId}/delete", method = RequestMethod.GET)
-    public String delete(@PathVariable("visitId") int visitId, @PathVariable("petId") int petId) {
-       
-        Pet pet=this.clinicService.findPetById(petId);
-        Visit visit=this.clinicService.findVisitsById(visitId);
-        pet.deleteVisit(visit);
-        this.clinicService.savePet(pet);
-
-        this.clinicService.deleteVisit(visitId);
-        return "redirect:/owners/{ownerId}";
-     
     }
 
 }

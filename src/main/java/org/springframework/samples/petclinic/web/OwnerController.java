@@ -145,10 +145,7 @@ public class OwnerController {
     	List<Pet> pets = new ArrayList<>();
         pets = owner.getPets();
         for (Pet pet : pets) {
-            
-	        this.clinicService.deleteAllHotelsByPetId(pet.getId());
-			this.clinicService.deleteAllVisitsByPetId(pet.getId());
-	        this.clinicService.deletePet(pet);
+			this.clinicService.deletePet(pet);
 		}
         this.clinicService.deleteOwner(owner);
         return "redirect:/owners";    

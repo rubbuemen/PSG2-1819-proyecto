@@ -10,7 +10,7 @@
         <div class="navbar-header">
             <a class="navbar-brand" href="<spring:url value="/" htmlEscape="true" />"><span></span></a>
             <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#main-navbar">
-                <span class="sr-only">Toggle navigation</span>
+                <span class="sr-only"><os-p>Toggle navigation</os-p></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
@@ -32,11 +32,6 @@
                 <petclinic:menuItem active="${name eq 'vets'}" url="/vets.html" title="veterinarians">
                     <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
                     <span><fmt:message key="veterinarians"/></span>
-                </petclinic:menuItem>
-                
-                <petclinic:menuItem active="${name eq 'causes'}" url="/causes.html" title="causes">
-                    <span class="glyphicon glyphicon-th-list" aria-hidden="true"></span>
-                    <span><fmt:message key="causes"/></span>
                 </petclinic:menuItem>
 
                 <petclinic:menuItem active="${name eq 'error'}" url="/oups.html"

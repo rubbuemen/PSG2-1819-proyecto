@@ -18,12 +18,8 @@ package org.springframework.samples.petclinic.repository;
 import java.util.List;
 
 import org.springframework.dao.DataAccessException;
-import org.springframework.data.jpa.repository.Modifying;
-import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.BaseEntity;
 import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Repository class for <code>Visit</code> domain objects All method names are compliant with Spring Data naming
@@ -45,20 +41,5 @@ public interface VisitRepository {
     void save(Visit visit) throws DataAccessException;
 
     List<Visit> findByPetId(Integer petId);
-    
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Visit v where v.id=:visitId")
-    void delete(@Param(value = "visitId") int visitId) throws DataAccessException;
-    
-    @Query("SELECT v FROM Visit v where v.id=:visitId")
-	Visit findByVisitId(@Param(value = "visitId") int visitId) throws DataAccessException;
-
-    @Transactional
-    @Modifying
-    @Query("DELETE FROM Visit v where v.pet.id=:petId")
-    void deleteAllVisitsByPetId(@Param(value = "petId") int petId) throws DataAccessException;
-     
-   
 
 }
