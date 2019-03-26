@@ -2,9 +2,12 @@ DROP TABLE vet_specialties IF EXISTS;
 DROP TABLE vets IF EXISTS;
 DROP TABLE specialties IF EXISTS;
 DROP TABLE visits IF EXISTS;
+DROP TABLE hotels IF EXISTS;
 DROP TABLE pets IF EXISTS;
 DROP TABLE types IF EXISTS;
 DROP TABLE owners IF EXISTS;
+DROP TABLE causes IF EXISTS;
+DROP TABLE donations IF EXISTS;
 
 
 CREATE TABLE vets (
@@ -62,3 +65,34 @@ CREATE TABLE visits (
 );
 ALTER TABLE visits ADD CONSTRAINT fk_visits_pets FOREIGN KEY (pet_id) REFERENCES pets (id);
 CREATE INDEX visits_pet_id ON visits (pet_id);
+
+CREATE TABLE hotels (
+  id          INTEGER IDENTITY PRIMARY KEY,
+  pet_id      INTEGER NOT NULL,
+  details VARCHAR(255),
+  start_date_book  DATE,
+  end_date_book DATE
+);
+ALTER TABLE hotels ADD CONSTRAINT fk_hotels_pets FOREIGN KEY (pet_id) REFERENCES pets (id);
+CREATE INDEX hotels_pet_id ON hotels (pet_id);
+
+CREATE TABLE causes (
+  id         INTEGER IDENTITY PRIMARY KEY,
+  name VARCHAR(30),
+  description VARCHAR(255),
+  budged_target DOUBLE NOT NULL,
+  organization VARCHAR(30),
+  is_closed BOOLEAN
+  
+);
+CREATE INDEX causes_name ON causes (name);
+
+CREATE TABLE donations (
+  id         INTEGER IDENTITY PRIMARY KEY,
+  client     VARCHAR(30),
+  date_of_donation DATE,
+  amount	 DOUBLE NOT NULL,
+  cause_id    INTEGER NOT NULL,
+);
+ALTER TABLE donations ADD CONSTRAINT fk_donations_causes FOREIGN KEY (cause_id) REFERENCES causes (id);
+CREATE INDEX donations_client ON donations (client);
