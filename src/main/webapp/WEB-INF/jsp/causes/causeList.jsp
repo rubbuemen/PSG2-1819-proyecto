@@ -14,6 +14,12 @@
 		<thead>
 			<tr>
 				<th><fmt:message key="name" /></th>
+				<th><fmt:message key="budgetAchieved"/></th>
+				<th><fmt:message key="budgetTarget"/></th>
+				<c:if test="${!cause.isClosed}">
+				<th></th>
+				<th></th>
+				</c:if>
 			</tr>
 		</thead>
 		<tbody>
@@ -23,7 +29,20 @@
 							<spring:param name="causeId" value="${cause.id}" />
 						</spring:url>
 						<c:out value="${cause.name}" /></td>
+						<td><c:out value="${40}"/></td>
+				<td><c:out value="${cause.budgetTarget}"/></td>
+				<td><spring:url value="donation/new/{causeId}" var="createUrl">
+       			<spring:param name="causeId" value="${cause.id}"/>
+    			</spring:url>
+   				<a href="${fn:escapeXml(createUrl)}" class="btn btn-default"><fmt:message key="createDonation"/></a>
+				</td>
+				<td><spring:url value="/causes/{causeId}" var="detailsUrl">
+       			<spring:param name="causeId" value="${cause.id}"/>
+    			</spring:url>
+   				<a href="${fn:escapeXml(detailsUrl)}" class="btn btn-default"><fmt:message key="causeDetails"/></a>
+				</td>
 				</tr>
+				
 			</c:forEach>
 		</tbody>
 	</table>
