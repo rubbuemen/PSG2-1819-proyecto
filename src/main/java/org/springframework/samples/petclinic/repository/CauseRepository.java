@@ -13,22 +13,22 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package org.springframework.samples.petclinic.repository.springdatajpa;
+package org.springframework.samples.petclinic.repository;
 
+import java.util.Collection;
 
-import org.springframework.data.repository.Repository;
+import org.springframework.dao.DataAccessException;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
+import org.springframework.samples.petclinic.model.Cause;
 
-import org.springframework.samples.petclinic.model.Visit;
-import org.springframework.samples.petclinic.repository.VisitRepository;
+public interface CauseRepository {
 
-
-/**
- * Spring Data JPA specialization of the {@link VisitRepository} interface
- *
- * @author Michael Isvy
- * @since 15.1.2013
- */
-public interface SpringDataVisitRepository extends VisitRepository, Repository<Visit, Integer> {
-
-	   
+    void save(Cause cause) throws DataAccessException;
+    
+    @Query("SELECT c FROM Cause c where c.id=:causeId")
+	Cause findByCauseId(@Param(value = "causeId") int causeId) throws DataAccessException;
+    
+    Collection<Cause> findAll() throws DataAccessException;
+    
 }
