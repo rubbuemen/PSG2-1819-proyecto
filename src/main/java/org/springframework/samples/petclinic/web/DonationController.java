@@ -1,6 +1,7 @@
 package org.springframework.samples.petclinic.web;
 
-import java.util.Map;
+
+import java.time.LocalDate;
 
 import javax.validation.Valid;
 
@@ -9,6 +10,7 @@ import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
@@ -40,21 +42,30 @@ public class DonationController {
     }
 
     @RequestMapping(value = "/donations/new", method = RequestMethod.GET)
-    public String initCreationForm(Cause cause, Map<String, Object> model) {
+    public String initCreationForm(Cause cause, ModelMap model) {
         Donation donation = new Donation();
-        donation.setCause(cause);
         cause.addDonation(donation);
         model.put("donation", donation);
         return VIEWS_DONATION_CREATE_OR_UPDATE_FORM;
     }
 
     @RequestMapping(value = "/donations/new", method = RequestMethod.POST)
-    public String processCreationForm(Cause cause, @Valid Donation donation, BindingResult result, Map<String, Object> model) {
+    public String processCreationForm(Cause cause, @Valid Donation donation, BindingResult result, ModelMap model) {
     	donation.setCause(cause);
     	if (cause.getIsClosed()==true){
             result.rejectValue("client", "closed");
-//        }else if((cause.getBudgetTarget())<1){
-//        	result.rejectValue("amount", "overmuch");
+            result.rejectValue("date", "closed");
+            result.rejectValue("amount", "closed");
+    	} 
+    	if(donation.getDate().isBefore(LocalDate.now())){
+         	result.rejectValue("date", "before");
+        }
+    	if(cause.getDonations().isEmpty()){
+        	if(donation.getAmount() > cause.getBudgetTarget()){
+    			result.rejectValue("amount", "overmuch");
+        	}
+        }else if(clinicService.totalBudget(cause.getId()) + donation.getAmount() > cause.getBudgetTarget()){
+        	result.rejectValue("amount", "overmuch");
         }
         if (result.hasErrors()) {
         	model.put("donation", donation);

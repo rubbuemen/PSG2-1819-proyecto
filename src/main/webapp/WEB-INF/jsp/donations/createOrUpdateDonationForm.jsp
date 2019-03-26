@@ -29,12 +29,6 @@
                         <c:out value="${donation.cause.name}"/>
                     </div>
              </div>
-<!--              <div class="form-group"> -->
-<%--                     <label class="col-sm-2 control-label"><fmt:message key="date"/></label> --%>
-<!--                     <div class="col-sm-10"> -->
-<%--                         <c:out value="${donation.date}"/> --%>
-<!--                     </div> -->
-<!--              </div> -->
       		<fmt:message var="amount" key="amount"/>
       		<fmt:message var="client" key="client"/>
       		<fmt:message var="date" key="date"/>
