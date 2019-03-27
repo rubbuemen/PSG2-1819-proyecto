@@ -81,3 +81,14 @@ CREATE TABLE IF NOT EXISTS causes (
   organization VARCHAR(30),
   is_closed BOOLEAN
 )  engine=InnoDB;
+
+
+CREATE TABLE IF NOT EXISTS donations (
+  id INT(4) UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+  client VARCHAR(30),
+  date_of_donation DATE,
+  amount DOUBLE NOT NULL,
+  cause_id INT(4) UNSIGNED NOT NULL,
+  INDEX(name),
+  FOREIGN KEY (cause_id) REFERENCES causes(id)
+) engine=InnoDB;

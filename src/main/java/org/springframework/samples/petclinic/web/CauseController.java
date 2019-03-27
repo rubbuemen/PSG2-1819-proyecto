@@ -48,6 +48,8 @@ public class CauseController {
         List<Cause> causes = new ArrayList<>();
         causes.addAll(this.clinicService.findCauses());
         model.put("causes", causes);
+        List<Double> donations=new ArrayList<>(this.clinicService.findDonationsByCauses(causes));
+        model.put("donations", donations);
         return "causes/causeList";
     }
 
@@ -73,6 +75,7 @@ public class CauseController {
     public ModelAndView showCause(@PathVariable("causeId") int causeId) {
         ModelAndView mav = new ModelAndView("causes/causeDetails");
         mav.addObject(this.clinicService.findCauseById(causeId));
+        mav.addObject("cause",this.clinicService.findCauseById(causeId));
         return mav;
     }
 
