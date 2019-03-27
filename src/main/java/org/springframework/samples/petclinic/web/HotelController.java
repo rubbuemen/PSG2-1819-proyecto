@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.web;
 
+import java.util.Collection;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HotelController {
 
     private final ClinicService clinicService;
+    
 
 
     @Autowired
@@ -70,12 +72,35 @@ public class HotelController {
     public String initNewHotelForm(@PathVariable("petId") int petId, Map<String, Object> model) {
         return "pets/createOrUpdateHotelForm";
     }
-
+    
     @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/new", method = RequestMethod.POST)
     public String processNewHotelForm(@Valid Hotel hotel, BindingResult result) {
+    	Collection<Hotel> hotels = this.clinicService.findHotelsByPetId(hotel.getPet().getId());
+    	if (!(hotel.getStartDate() == null || hotel.getEndDate() == null)) {
+    		for(int i =0;i<hotels.size();i++) {
+        		boolean actualStartDateBeforeNewStartDate = hotel.getPet().getHotels().get(i).getStartDate().isBefore(hotel.getStartDate());
+        		boolean actualEndDateAfterNewStartDate = hotel.getPet().getHotels().get(i).getEndDate().isAfter(hotel.getStartDate());
+        		boolean actualStartDateBeforeNewEndDate = hotel.getPet().getHotels().get(i).getStartDate().isBefore(hotel.getEndDate());
+        		boolean actualEndDateAfterNewEndDate = hotel.getPet().getHotels().get(i).getEndDate().isAfter(hotel.getEndDate());
+        		boolean actualStartDateEqualsNewStartDate = hotel.getPet().getHotels().get(i).getStartDate().equals(hotel.getStartDate());
+        		boolean actualEndDateEqualsNewEndDate = hotel.getPet().getHotels().get(i).getEndDate().equals(hotel.getEndDate());
+        		boolean actualStartDateAfterNewStartDate = hotel.getPet().getHotels().get(i).getStartDate().isAfter(hotel.getStartDate());
+        		boolean actualEndDateBeforeNewEndDate = hotel.getPet().getHotels().get(i).getEndDate().isBefore(hotel.getEndDate());
+        		
+        		if((actualStartDateBeforeNewStartDate || actualStartDateEqualsNewStartDate) &&	actualEndDateAfterNewStartDate || actualStartDateBeforeNewEndDate && (actualEndDateAfterNewEndDate || actualEndDateEqualsNewEndDate) || (actualStartDateEqualsNewStartDate && actualEndDateEqualsNewEndDate) || (actualStartDateAfterNewStartDate && actualEndDateBeforeNewEndDate)) {
+        			result.rejectValue("endDate", "duplicateHotel", "There is already a current booking for this pet");
+        		}
+        		
+        		if(hotel.getStartDate().isAfter(hotel.getEndDate())) {
+        			result.rejectValue("endDate", "dateStartDateAfterDateEndDate", "The start date can not be after the end date");
+        		}
+        	}
+    	}
+    	
         if (result.hasErrors()) {
             return "pets/createOrUpdateHotelForm";
         } else {
+        	
             this.clinicService.saveHotel(hotel);
             return "redirect:/owners/{ownerId}";
         }
