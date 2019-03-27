@@ -224,6 +224,7 @@ public class ClinicServiceImpl implements ClinicService {
 		return causeRepository.findAll();
 		
 	}
+	
 	public void saveDonation(Donation donation) throws DataAccessException {
 		donationRepository.save(donation);
 	}
@@ -256,5 +257,4 @@ public class ClinicServiceImpl implements ClinicService {
 		// TODO Auto-generated method stub
 		return donationRepository.findByCauseId(id);
 	}
-
 }

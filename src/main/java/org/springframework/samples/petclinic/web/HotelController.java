@@ -15,6 +15,7 @@
  */
 package org.springframework.samples.petclinic.web;
 
+import java.util.Collection;
 import java.util.Map;
 
 import javax.validation.Valid;
@@ -36,6 +37,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 public class HotelController {
 
     private final ClinicService clinicService;
+    
 
 
     @Autowired
@@ -70,12 +72,22 @@ public class HotelController {
     public String initNewHotelForm(@PathVariable("petId") int petId, Map<String, Object> model) {
         return "pets/createOrUpdateHotelForm";
     }
-
+    
     @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/new", method = RequestMethod.POST)
     public String processNewHotelForm(@Valid Hotel hotel, BindingResult result) {
+    	Collection<Hotel> hotels = this.clinicService.findHotelsByPetId(hotel.getPet().getId());
+    	for(int i =0;i<hotels.size();i++) {
+    		if((hotel.getPet().getHotels().get(i).getStartDate().isBefore(hotel.getStartDate())&&
+    				hotel.getPet().getHotels().get(i).getEndDate().isAfter(hotel.getStartDate()))||
+    				(hotel.getPet().getHotels().get(i).getStartDate().isBefore(hotel.getEndDate())&&
+    				hotel.getPet().getHotels().get(i).getEndDate().isAfter(hotel.getEndDate()))) {
+    			result.rejectValue("endDate", "duplicateHotel", "There is already a current booking for this pet");
+    		}
+    	}
         if (result.hasErrors()) {
             return "pets/createOrUpdateHotelForm";
         } else {
+        	
             this.clinicService.saveHotel(hotel);
             return "redirect:/owners/{ownerId}";
         }
