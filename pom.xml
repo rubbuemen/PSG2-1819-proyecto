@@ -6,7 +6,7 @@
     <artifactId>spring-framework-petclinic</artifactId>
     <version>5.1.3</version>
 
-    <name>petclinic</name>
+    <name>PSG2-1819-G2-23</name>
     <packaging>war</packaging>
     <description>A Spring Framework application based on JSP, Spring MVC, Spring Data JPA, Hibernate and JDBC</description>
     <url>https://github.com/spring-petclinic/</url>
