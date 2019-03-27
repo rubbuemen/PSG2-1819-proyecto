@@ -123,6 +123,5 @@ public class Cause extends BaseEntity {
 	    getDonationsInternal().add(donation);
 	    donation.setCause(this);
 	}
-
 }
 

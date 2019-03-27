@@ -85,7 +85,6 @@ CREATE TABLE causes (
   is_closed BOOLEAN
 );
 
-
 CREATE INDEX causes_name ON causes (name);
 
 CREATE TABLE donations (
@@ -96,4 +95,6 @@ CREATE TABLE donations (
   cause_id    INTEGER NOT NULL,
 );
 ALTER TABLE donations ADD CONSTRAINT fk_donations_causes FOREIGN KEY (cause_id) REFERENCES causes (id);
+
 CREATE INDEX donations_client ON donations (client);
+

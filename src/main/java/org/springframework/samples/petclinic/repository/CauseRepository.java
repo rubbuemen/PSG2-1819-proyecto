@@ -23,7 +23,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Donation;
 
-
 public interface CauseRepository {
 
     void save(Cause cause) throws DataAccessException;

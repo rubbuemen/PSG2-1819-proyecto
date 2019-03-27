@@ -16,6 +16,7 @@
 package org.springframework.samples.petclinic.web;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -23,6 +24,7 @@ import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
@@ -72,9 +74,12 @@ public class CauseController {
     }
     
     @RequestMapping("/causes/{causeId}")
-    public ModelAndView showCause(@PathVariable("causeId") int causeId) {
+    public ModelAndView showCause(@PathVariable("causeId") int causeId, Map<String, Object> model) {
+    	Collection<Donation> donations = new ArrayList<>();
+    	donations = this.clinicService.findDonations(causeId);
         ModelAndView mav = new ModelAndView("causes/causeDetails");
         mav.addObject(this.clinicService.findCauseById(causeId));
+        model.put("doantions", donations);
         mav.addObject("cause",this.clinicService.findCauseById(causeId));
         return mav;
     }

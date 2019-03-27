@@ -155,11 +155,6 @@ public class ClinicServiceImpl implements ClinicService {
 	public void deleteAllVisitsByPetId(int petId) throws DataAccessException {
 		this.visitRepository.deleteAllVisitsByPetId(petId);
 	}
-	
-	@Override
-	public Donation findByDonationId(int donationId) throws DataAccessException {
-		return donationRepository.findByDonationId(donationId);
-	}
 
 	@Override
 	@Transactional
@@ -218,13 +213,19 @@ public class ClinicServiceImpl implements ClinicService {
 		return causeRepository.findByCauseId(causeId);
 	}
 	
+
 	@Override
 	@Transactional
 	public Collection<Cause> findCauses() throws DataAccessException {
 		return causeRepository.findAll();
-		
 	}
 	
+	@Override
+	public Donation findByDonationId(int donationId) throws DataAccessException {
+		return donationRepository.findByDonationId(donationId);
+	}	
+
+
 	public void saveDonation(Donation donation) throws DataAccessException {
 		donationRepository.save(donation);
 	}
