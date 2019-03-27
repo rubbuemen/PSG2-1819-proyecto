@@ -17,36 +17,36 @@
 				<th><fmt:message key="budgetAchieved"/></th>
 				<th><fmt:message key="budgetTarget"/></th>
 				<c:if test="${!cause.isClosed}">
-				<th></th>
-				<th></th>
+					<th></th>
+					<th></th>
 				</c:if>
 			</tr>
 		</thead>
 		<tbody>
 			<c:forEach items="${causes}" var="cause">
-			<c:forEach items="${donations}" var="donation">
-				<tr>
-					<td><spring:url value="/causes/{causeId}.html" var="causeUrl">
-							<spring:param name="causeId" value="${cause.id}" />
-						</spring:url>
-						<c:out value="${cause.name}" /></td>
-				</tr>
-						
+				<c:forEach items="${donations}" var="donation">
+					<tr>
+						<td>
+							<spring:url value="/causes/{causeId}.html" var="causeUrl">
+								<spring:param name="causeId" value="${cause.id}" />
+							</spring:url>
+							<c:out value="${cause.name}" />
+						</td>
 						<td><c:out value="${donation}"/></td>
-						
-				<td><c:out value="${cause.budgetTarget}"/></td>
-				<c:if test="${!cause.isClosed}">
-				<td><spring:url value="causes/{causeId}/donations/new" var="createUrl">
-       			<spring:param name="causeId" value="${cause.id}"/>
-    			</spring:url>
-   				<a href="${fn:escapeXml(createUrl)}" class="btn btn-default"><fmt:message key="createDonation"/></a>
-				</td>
-				<td><spring:url value="/causes/{causeId}" var="detailsUrl">
-       			<spring:param name="causeId" value="${cause.id}"/>
-    			</spring:url>
-   				<a href="${fn:escapeXml(detailsUrl)}" class="btn btn-default"><fmt:message key="causeDetails"/></a>
-				</td>
-				</c:if>
+						<td><c:out value="${cause.budgetTarget}"/></td>
+						<c:if test="${!cause.isClosed}">
+							<td><spring:url value="causes/{causeId}/donations/new" var="createUrl">
+				       				<spring:param name="causeId" value="${cause.id}"/>
+				    			</spring:url>
+	   							<a href="${fn:escapeXml(createUrl)}" class="btn btn-default"><fmt:message key="createDonation"/></a>
+							</td>
+							<td><spring:url value="/causes/{causeId}" var="detailsUrl">
+	       							<spring:param name="causeId" value="${cause.id}"/>
+	    						</spring:url>
+	   							<a href="${fn:escapeXml(detailsUrl)}" class="btn btn-default"><fmt:message key="causeDetails"/></a>
+							</td>
+						</c:if>
+					</tr>
 				</c:forEach>
 			</c:forEach>
 		</tbody>

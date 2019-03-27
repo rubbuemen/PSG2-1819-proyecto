@@ -53,6 +53,10 @@
 			<fmt:message key="False" />
 		</c:if>
 	</h4>
+	<br />
+	<h3 style="color: #ff5f5f;">
+		<fmt:message key="donations" />
+	</h3>
 
 	<table id="dontaionsTable" class="table table-striped">
 		<thead>
@@ -66,7 +70,7 @@
 			<c:forEach items="${donations}" var="donation">
 				<tr>
 					<td><c:out value="${donation.client}" /></td>
-					<td><c:out value="${donation.date_of_donation}" /></td>
+					<td><c:out value="${donation.date}" /></td>
 					<td><c:out value="${donation.amount}" /></td>
 				</tr>
 			</c:forEach>

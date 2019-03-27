@@ -45,6 +45,7 @@ public class DonationController {
     public String initCreationForm(Cause cause, ModelMap model) {
         Donation donation = new Donation();
         cause.addDonation(donation);
+    	donation.setDate(LocalDate.now());
         model.put("donation", donation);
         return VIEWS_DONATION_CREATE_OR_UPDATE_FORM;
     }
@@ -54,12 +55,8 @@ public class DonationController {
     	donation.setCause(cause);
     	if (cause.getIsClosed()==true){
             result.rejectValue("client", "closed");
-            result.rejectValue("date", "closed");
             result.rejectValue("amount", "closed");
     	} 
-    	if(donation.getDate().isBefore(LocalDate.now())){
-         	result.rejectValue("date", "before");
-        }
     	if(cause.getDonations().isEmpty()){
         	if(donation.getAmount() > cause.getBudgetTarget()){
     			result.rejectValue("amount", "overmuch");
@@ -71,8 +68,8 @@ public class DonationController {
         	model.put("donation", donation);
             return VIEWS_DONATION_CREATE_OR_UPDATE_FORM;
         } else {
-            cause.addDonation(donation);
             this.clinicService.saveDonation(donation);
+            cause.addDonation(donation);
             if(cause.getBudgetTarget() <= clinicService.totalBudget(cause.getId())){
             	cause.setIsClosed(true);
             this.clinicService.saveCause(cause);

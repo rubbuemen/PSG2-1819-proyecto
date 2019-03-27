@@ -8,14 +8,6 @@
 
 <petclinic:layout pageName="donations">
 
-
-     <jsp:attribute name="customScript"> 
-       <script> -->
-            $(function () {
-                 $("#date").datepicker({dateFormat: 'yy/mm/dd'});
-            });
-        </script> 
-  </jsp:attribute> 
     <jsp:body>
     <h2>
         <c:if test="${donation['new']}"><fmt:message key="newDonation"/> </c:if>
@@ -31,8 +23,7 @@
              </div>
       		<fmt:message var="amount" key="amount"/>
       		<fmt:message var="client" key="client"/>
-      		<fmt:message var="date" key="date"/>
-            <petclinic:inputField label="${date}" name="date"/>
+      		<form:hidden path="date"/>
             <petclinic:inputField label="${amount}" name="amount"/>
             <petclinic:inputField label="${client}" name="client"/>
         </div>
