@@ -17,6 +17,7 @@ package org.springframework.samples.petclinic.web;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -49,9 +50,14 @@ public class CauseController {
     public String showCauseList(Map<String, Object> model) {
         List<Cause> causes = new ArrayList<>();
         causes.addAll(this.clinicService.findCauses());
-        model.put("causes", causes);
+     
         List<Double> donations=new ArrayList<>(this.clinicService.findDonationsByCauses(causes));
-        model.put("donations", donations);
+        
+        Map<Cause,Double> res=new HashMap<Cause,Double>();
+        for(int i=0;i<causes.size();i++) {
+        	res.put(causes.get(i), donations.get(i));
+        }
+        model.put("map", res);
         return "causes/causeList";
     }
 

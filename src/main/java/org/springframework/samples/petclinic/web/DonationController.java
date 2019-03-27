@@ -57,13 +57,6 @@ public class DonationController {
             result.rejectValue("client", "closed");
             result.rejectValue("amount", "closed");
     	} 
-    	if(cause.getDonations().isEmpty()){
-        	if(donation.getAmount() > cause.getBudgetTarget()){
-    			result.rejectValue("amount", "overmuch");
-        	}
-        }else if(clinicService.totalBudget(cause.getId()) + donation.getAmount() > cause.getBudgetTarget()){
-        	result.rejectValue("amount", "overmuch");
-        }
         if (result.hasErrors()) {
         	model.put("donation", donation);
             return VIEWS_DONATION_CREATE_OR_UPDATE_FORM;
