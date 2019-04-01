@@ -29,10 +29,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -59,7 +59,7 @@ public class VetController {
         return this.clinicService.findVetSpecialities();
     }
 
-    @RequestMapping(value = { "/vets"})
+    @GetMapping(value = { "/vets"})
     public String showVetList(Map<String, Object> model) {
         // Here we are returning an object of type 'Vets' rather than a collection of Vet objects
         // so it is simpler for Object-Xml mapping
@@ -69,7 +69,7 @@ public class VetController {
         return "vets/vetList";
     }
 
-    @RequestMapping(value = { "/vets.json", "/vets.xml"})
+    @GetMapping(value = { "/vets.json", "/vets.xml"})
     public
     @ResponseBody
     Vets showResourcesVetList() {
@@ -80,7 +80,7 @@ public class VetController {
         return vets;
     }
     
-    @RequestMapping(value = "/vets/{vetId}/delete", method = RequestMethod.GET)
+    @GetMapping(value = "/vets/{vetId}/delete")
     public String delete(@PathVariable("vetId") int vetId, ModelMap model) {
         Vet v = this.clinicService.findVetById(vetId);
         this.clinicService.deleteVet(v);
@@ -88,14 +88,14 @@ public class VetController {
      
     }
 
-    @RequestMapping(value = "/vets/new", method = RequestMethod.GET)
+    @GetMapping(value = "/vets/new")
     public String initCreationForm(Map<String, Object> model) {
         Vet vet = new Vet();
         model.put("vet", vet);
         return VIEWS_VET_CREATE_OR_UPDATE_FORM;
     }
 
-    @RequestMapping(value = "/vets/new", method = RequestMethod.POST)
+    @PostMapping(value = "/vets/new")
     public String processCreationForm(@Valid Vet vet, BindingResult result) {
         if (result.hasErrors()) {
             return VIEWS_VET_CREATE_OR_UPDATE_FORM;
@@ -105,14 +105,14 @@ public class VetController {
         }
     }
 
-    @RequestMapping(value = "/vets/{vetId}/edit", method = RequestMethod.GET)
+    @GetMapping(value = "/vets/{vetId}/edit")
     public String initUpdateOwnerForm(@PathVariable("vetId") int vetId, Model model) {
         Vet vet = this.clinicService.findVetById(vetId);
         model.addAttribute(vet);
         return VIEWS_VET_CREATE_OR_UPDATE_FORM;
     }
 
-    @RequestMapping(value = "/vets/{vetId}/edit", method = RequestMethod.POST)
+    @PostMapping(value = "/vets/{vetId}/edit")
     public String processUpdateOwnerForm(@Valid Vet vet, BindingResult result, @PathVariable("vetId") int vetId) {
         if (result.hasErrors()) {
             return VIEWS_VET_CREATE_OR_UPDATE_FORM;
@@ -123,7 +123,7 @@ public class VetController {
         }
     }
     
-    @RequestMapping("/vets/{vetId}")
+    @GetMapping("/vets/{vetId}")
     public ModelAndView showVet(@PathVariable("vetId") int vetId) {
         ModelAndView mav = new ModelAndView("vets/vetDetails");
         mav.addObject(this.clinicService.findVetById(vetId));

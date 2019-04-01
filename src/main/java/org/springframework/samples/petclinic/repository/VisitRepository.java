@@ -17,7 +17,6 @@ package org.springframework.samples.petclinic.repository;
 
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -42,22 +41,22 @@ public interface VisitRepository {
      * @param visit the <code>Visit</code> to save
      * @see BaseEntity#isNew
      */
-    void save(Visit visit) throws DataAccessException;
+    void save(Visit visit);
 
     List<Visit> findByPetId(Integer petId);
     
     @Transactional
     @Modifying
     @Query("DELETE FROM Visit v where v.id=:visitId")
-    void delete(@Param(value = "visitId") int visitId) throws DataAccessException;
+    void delete(@Param(value = "visitId") int visitId);
     
     @Query("SELECT v FROM Visit v where v.id=:visitId")
-	Visit findByVisitId(@Param(value = "visitId") int visitId) throws DataAccessException;
+	Visit findByVisitId(@Param(value = "visitId") int visitId);
 
     @Transactional
     @Modifying
     @Query("DELETE FROM Visit v where v.pet.id=:petId")
-    void deleteAllVisitsByPetId(@Param(value = "petId") int petId) throws DataAccessException;
+    void deleteAllVisitsByPetId(@Param(value = "petId") int petId);
      
    
 

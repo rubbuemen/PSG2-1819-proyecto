@@ -20,7 +20,6 @@ import java.util.Collection;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.model.Hotel;
@@ -71,49 +70,49 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<PetType> findPetTypes() throws DataAccessException {
+	public Collection<PetType> findPetTypes(){
 		return petRepository.findPetTypes();
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Owner findOwnerById(int id) throws DataAccessException {
+	public Owner findOwnerById(int id){
 		return ownerRepository.findById(id);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException {
+	public Collection<Owner> findOwnerByLastName(String lastName)  {
 		return ownerRepository.findByLastName(lastName);
 	}
 
 	@Override
 	@Transactional
-	public void saveOwner(Owner owner) throws DataAccessException {
+	public void saveOwner(Owner owner) {
 		ownerRepository.save(owner);
 	}
 
 	@Override
 	@Transactional
-	public void saveVisit(Visit visit) throws DataAccessException {
+	public void saveVisit(Visit visit) {
 		visitRepository.save(visit);
 	}
 
 	@Override
 	@Transactional(readOnly = true)
-	public Pet findPetById(int id) throws DataAccessException {
+	public Pet findPetById(int id)  {
 		return petRepository.findById(id);
 	}
 
 	@Override
 	@Transactional
-	public void savePet(Pet pet) throws DataAccessException {
+	public void savePet(Pet pet)  {
 		petRepository.save(pet);
 	}
 
 	@Override
 	@Transactional
-	public Collection<Vet> findVets() throws DataAccessException {
+	public Collection<Vet> findVets()  {
 		return vetRepository.findAll();
 	}
 
@@ -124,13 +123,13 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional
-	public void deletePet(Pet pet) throws DataAccessException {
+	public void deletePet(Pet pet)  {
 		petRepository.delete(pet.getId());
 	}
 
 	@Override
 	@Transactional
-	public void saveHotel(Hotel hotel) throws DataAccessException {
+	public void saveHotel(Hotel hotel)  {
 		hotelRepository.save(hotel);
 	}
 	
@@ -142,7 +141,7 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional
-	public void deleteVisit(int visitId) throws DataAccessException {
+	public void deleteVisit(int visitId)  {
 		visitRepository.delete(visitId);
 	}
 
@@ -152,13 +151,13 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 
 	@Override
-	public void deleteAllVisitsByPetId(int petId) throws DataAccessException {
+	public void deleteAllVisitsByPetId(int petId)  {
 		this.visitRepository.deleteAllVisitsByPetId(petId);
 	}
 
 	@Override
 	@Transactional
-	public void deleteHotel(int hotelId) throws DataAccessException {
+	public void deleteHotel(int hotelId)  {
 		hotelRepository.delete(hotelId);
 	}
 
@@ -168,43 +167,43 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 
 	@Override
-	public void deleteAllHotelsByPetId(int petId) throws DataAccessException {
+	public void deleteAllHotelsByPetId(int petId)  {
 		this.hotelRepository.deleteAllHotelsByPetId(petId);
 
 	}
 
 	@Transactional
-	public void deleteOwner(Owner owner) throws DataAccessException {
+	public void deleteOwner(Owner owner)  {
 		ownerRepository.delete(owner.getId());
 	}
 	
     @Override
     @Transactional(readOnly = true)
-	public Vet findVetById(int id) throws DataAccessException {
+	public Vet findVetById(int id)  {
 		return vetRepository.findById(id);
 	}
 	
 	@Override
 	@Transactional
-	public void saveVet(Vet vet) throws DataAccessException {
+	public void saveVet(Vet vet)  {
 		vetRepository.save(vet);
 	}
 	
 	@Override
 	@Transactional
-	public void deleteVet(Vet vet) throws DataAccessException {
+	public void deleteVet(Vet vet)  {
 		vetRepository.delete(vet.getId());
 	}
 	
 	@Override
 	@Transactional(readOnly = true)
-	public Collection<Specialty> findVetSpecialities() throws DataAccessException {
+	public Collection<Specialty> findVetSpecialities()  {
 		return vetRepository.findVetSpecialities();
 	}
 	
 	@Override
 	@Transactional
-	public void saveCause(Cause cause) throws DataAccessException {
+	public void saveCause(Cause cause) {
 		causeRepository.save(cause);
 	}
 	
@@ -216,27 +215,27 @@ public class ClinicServiceImpl implements ClinicService {
 
 	@Override
 	@Transactional
-	public Collection<Cause> findCauses() throws DataAccessException {
+	public Collection<Cause> findCauses()  {
 		return causeRepository.findAll();
 	}
 	
 	@Override
-	public Donation findByDonationId(int donationId) throws DataAccessException {
+	public Donation findByDonationId(int donationId)  {
 		return donationRepository.findByDonationId(donationId);
 	}	
 
 
-	public void saveDonation(Donation donation) throws DataAccessException {
+	public void saveDonation(Donation donation)  {
 		donationRepository.save(donation);
 	}
 
 	@Override
-	public Double totalBudget(int causeId) throws DataAccessException {
+	public Double totalBudget(int causeId)  {
 		return causeRepository.totalBudget(causeId);
 	}
 
 	@Override
-	public Collection<Donation> findDonations(int causeId) throws DataAccessException {
+	public Collection<Donation> findDonations(int causeId)  {
 		return causeRepository.findDonations(causeId);
 	}
 
@@ -255,7 +254,6 @@ public class ClinicServiceImpl implements ClinicService {
 	}
 
 	private Collection<Donation> findDonationsByCauseId(Integer id) {
-		// TODO Auto-generated method stub
 		return donationRepository.findByCauseId(id);
 	}
 }

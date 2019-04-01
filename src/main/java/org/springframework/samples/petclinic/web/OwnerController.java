@@ -31,10 +31,10 @@ import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 /**
@@ -60,14 +60,14 @@ public class OwnerController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping(value = "/owners/new", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/new")
     public String initCreationForm(Map<String, Object> model) {
         Owner owner = new Owner();
         model.put("owner", owner);
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
-    @RequestMapping(value = "/owners/new", method = RequestMethod.POST)
+    @PostMapping(value = "/owners/new")
     public String processCreationForm(@Valid Owner owner, BindingResult result) {
         if (result.hasErrors()) {
             return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
@@ -77,13 +77,13 @@ public class OwnerController {
         }
     }
 
-    @RequestMapping(value = "/owners/find", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/find")
     public String initFindForm(Map<String, Object> model) {
         model.put("owner", new Owner());
         return "owners/findOwners";
     }
 
-    @RequestMapping(value = "/owners", method = RequestMethod.GET)
+    @GetMapping(value = "/owners")
     public String processFindForm(Owner owner, BindingResult result, Map<String, Object> model) {
 
         // allow parameterless GET request for /owners to return all records
@@ -108,14 +108,14 @@ public class OwnerController {
         }
     }
 
-    @RequestMapping(value = "/owners/{ownerId}/edit", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/{ownerId}/edit")
     public String initUpdateOwnerForm(@PathVariable("ownerId") int ownerId, Model model) {
         Owner owner = this.clinicService.findOwnerById(ownerId);
         model.addAttribute(owner);
         return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
     }
 
-    @RequestMapping(value = "/owners/{ownerId}/edit", method = RequestMethod.POST)
+    @PostMapping(value = "/owners/{ownerId}/edit")
     public String processUpdateOwnerForm(@Valid Owner owner, BindingResult result, @PathVariable("ownerId") int ownerId) {
         if (result.hasErrors()) {
             return VIEWS_OWNER_CREATE_OR_UPDATE_FORM;
@@ -132,14 +132,14 @@ public class OwnerController {
      * @param ownerId the ID of the owner to display
      * @return a ModelMap with the model attributes for the view
      */
-    @RequestMapping("/owners/{ownerId}")
+    @GetMapping("/owners/{ownerId}")
     public ModelAndView showOwner(@PathVariable("ownerId") int ownerId) {
         ModelAndView mav = new ModelAndView("owners/ownerDetails");
         mav.addObject(this.clinicService.findOwnerById(ownerId));
         return mav;
     }
 
-    @RequestMapping(value = "/owners/{ownerId}/delete", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/{ownerId}/delete")
     public String delete(@PathVariable("ownerId") int ownerId, ModelMap model) {
         Owner owner = this.clinicService.findOwnerById(ownerId);
     	List<Pet> pets = new ArrayList<>();

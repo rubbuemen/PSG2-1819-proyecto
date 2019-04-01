@@ -18,7 +18,6 @@ package org.springframework.samples.petclinic.repository;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -42,19 +41,19 @@ public interface VetRepository {
      *
      * @return a <code>Collection</code> of <code>Vet</code>s
      */
-    Collection<Vet> findAll() throws DataAccessException;
+    Collection<Vet> findAll();
     
     @Transactional
     @Modifying
     @Query("DELETE FROM Vet v where v.id=:vetId")
-    void delete(@Param(value = "vetId") int vetId) throws DataAccessException;
+    void delete(@Param(value = "vetId") int vetId) ;
     
 
-	Vet findById(int id) throws DataAccessException;
+	Vet findById(int id);
 
-	void save(Vet vet) throws DataAccessException;
+	void save(Vet vet) ;
 
-	List<Specialty> findVetSpecialities() throws DataAccessException;
+	List<Specialty> findVetSpecialities();
 
 
 }

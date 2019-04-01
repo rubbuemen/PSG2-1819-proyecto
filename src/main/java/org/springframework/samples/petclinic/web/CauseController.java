@@ -29,9 +29,9 @@ import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -46,7 +46,7 @@ public class CauseController {
         this.clinicService = clinicService;
     }
 
-    @RequestMapping(value = { "/causes"})
+    @GetMapping(value = { "/causes"} )
     public String showCauseList(Map<String, Object> model) {
         List<Cause> causes = new ArrayList<>();
         causes.addAll(this.clinicService.findCauses());
@@ -61,7 +61,7 @@ public class CauseController {
         return "causes/causeList";
     }
 
-    @RequestMapping(value = "/causes/new", method = RequestMethod.GET)
+    @GetMapping(value = "/causes/new")
     public String initCreationForm(Map<String, Object> model) {
         Cause cause = new Cause();
         cause.setIsClosed(false);
@@ -69,7 +69,7 @@ public class CauseController {
         return VIEWS_CAUSE_CREATE_OR_UPDATE_FORM;
     }
 
-    @RequestMapping(value = "/causes/new", method = RequestMethod.POST)
+    @PostMapping(value = "/causes/new")
     public String processCreationForm(@Valid Cause cause, BindingResult result) {
         if (result.hasErrors()) {
             return VIEWS_CAUSE_CREATE_OR_UPDATE_FORM;
@@ -79,7 +79,7 @@ public class CauseController {
         }
     }
     
-    @RequestMapping("/causes/{causeId}")
+    @GetMapping("/causes/{causeId}")
     public ModelAndView showCause(@PathVariable("causeId") int causeId, Map<String, Object> model) {
     	Collection<Donation> donations = new ArrayList<>();
     	donations = this.clinicService.findDonations(causeId);

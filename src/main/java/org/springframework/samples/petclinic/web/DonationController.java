@@ -13,11 +13,13 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+
 
 @Controller
 @RequestMapping("/causes/{causeId}")
@@ -41,7 +43,7 @@ public class DonationController {
         dataBinder.setDisallowedFields("id");
     }
 
-    @RequestMapping(value = "/donations/new", method = RequestMethod.GET)
+    @GetMapping(value = "/donations/new")
     public String initCreationForm(Cause cause, ModelMap model) {
         Donation donation = new Donation();
         cause.addDonation(donation);
@@ -50,7 +52,7 @@ public class DonationController {
         return VIEWS_DONATION_CREATE_OR_UPDATE_FORM;
     }
 
-    @RequestMapping(value = "/donations/new", method = RequestMethod.POST)
+    @PostMapping(value = "/donations/new")
     public String processCreationForm(Cause cause, @Valid Donation donation, BindingResult result, ModelMap model) {
     	donation.setCause(cause);
     	if (cause.getIsClosed()==true){

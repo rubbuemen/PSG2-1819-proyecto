@@ -27,11 +27,12 @@ import org.springframework.samples.petclinic.service.ClinicService;
 import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.PostMapping;
+
 
 @Controller
 public class HotelController {
@@ -68,12 +69,12 @@ public class HotelController {
         return hotel;
     }
 
-    @RequestMapping(value = "/owners/*/pets/{petId}/hotels/new", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/*/pets/{petId}/hotels/new")
     public String initNewHotelForm(@PathVariable("petId") int petId, Map<String, Object> model) {
         return "pets/createOrUpdateHotelForm";
     }
     
-    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/new", method = RequestMethod.POST)
+    @PostMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/new")
     public String processNewHotelForm(@Valid Hotel hotel, BindingResult result) {
     	Collection<Hotel> hotels = this.clinicService.findHotelsByPetId(hotel.getPet().getId());
     	if (!(hotel.getStartDate() == null || hotel.getEndDate() == null)) {
@@ -106,13 +107,13 @@ public class HotelController {
         }
     }
 
-    @RequestMapping(value = "/owners/*/pets/{petId}/hotels", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/*/pets/{petId}/hotels")
     public String showHotels(@PathVariable int petId, Map<String, Object> model) {
         model.put("hotels", this.clinicService.findPetById(petId).getHotels());
         return "hotelList";
     }
     
-    @RequestMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/{hotelId}/delete", method = RequestMethod.GET)
+    @GetMapping(value = "/owners/{ownerId}/pets/{petId}/hotels/{hotelId}/delete")
     public String delete(@PathVariable("hotelId") int hotelId, @PathVariable("petId") int petId) {
        
         Pet pet=this.clinicService.findPetById(petId);

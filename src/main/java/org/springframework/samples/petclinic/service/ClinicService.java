@@ -18,7 +18,6 @@ package org.springframework.samples.petclinic.service;
 import java.util.Collection;
 import java.util.List;
 
-import org.springframework.dao.DataAccessException;
 import org.springframework.samples.petclinic.model.Cause;
 import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.model.Hotel;
@@ -37,69 +36,69 @@ import org.springframework.samples.petclinic.model.Visit;
  */
 public interface ClinicService {
 
-    Collection<PetType> findPetTypes() throws DataAccessException;
+    Collection<PetType> findPetTypes();
 
-    Owner findOwnerById(int id) throws DataAccessException;
+    Owner findOwnerById(int id);
     
-    Vet findVetById(int id) throws DataAccessException;
+    Vet findVetById(int id);
 
-    Pet findPetById(int id) throws DataAccessException;
+    Pet findPetById(int id);
 
-    void savePet(Pet pet) throws DataAccessException;
+    void savePet(Pet pet);
 
-    void saveVisit(Visit visit) throws DataAccessException;
+    void saveVisit(Visit visit);
     
-	void saveVet(Vet vet) throws DataAccessException;
+	void saveVet(Vet vet);
 	
-    void saveOwner(Owner owner) throws DataAccessException;
+    void saveOwner(Owner owner);
 
-    Collection<Vet> findVets() throws DataAccessException;
+    Collection<Vet> findVets();
 
-    Collection<Owner> findOwnerByLastName(String lastName) throws DataAccessException;
+    Collection<Owner> findOwnerByLastName(String lastName);
 
 	Collection<Visit> findVisitsByPetId(int petId);
 
-	void deletePet(Pet pet) throws DataAccessException;
+	void deletePet(Pet pet) ;
 
-    void saveHotel(Hotel hotel) throws DataAccessException;
+    void saveHotel(Hotel hotel);
     
     Collection<Hotel> findHotelsByPetId(int petId);
 
-    void deleteHotel(int hotelId) throws DataAccessException;
+    void deleteHotel(int hotelId);
 
-	Hotel findHotelById(int hotelId) throws DataAccessException;
+	Hotel findHotelById(int hotelId);
 	
-	void deleteAllHotelsByPetId(int petId) throws DataAccessException;
+	void deleteAllHotelsByPetId(int petId);
 	
 	
 	
 
-	void deleteVisit(int visitId) throws DataAccessException;
+	void deleteVisit(int visitId);
 
-	Visit findVisitsById(int visitId) throws DataAccessException;
+	Visit findVisitsById(int visitId);
 	
-	void deleteVet(Vet vet) throws DataAccessException;
+	void deleteVet(Vet vet);
 	
-	void deleteAllVisitsByPetId(int petId) throws DataAccessException;
+	void deleteAllVisitsByPetId(int petId);
 
-	void deleteOwner(Owner owner) throws DataAccessException;
+	void deleteOwner(Owner owner);
 	
-	Collection<Specialty> findVetSpecialities() throws DataAccessException;
+	Collection<Specialty> findVetSpecialities();
 	
-	void saveCause(Cause cause) throws DataAccessException;
+	void saveCause(Cause cause);
 	
-	Cause findCauseById(int causeId) throws DataAccessException;
+	Cause findCauseById(int causeId);
 	
-	Collection<Cause> findCauses() throws DataAccessException;
+	Collection<Cause> findCauses();
 	
-	Donation findByDonationId(int donationId) throws DataAccessException;
+	Donation findByDonationId(int donationId);
 	
-	void saveDonation(Donation donation) throws DataAccessException;
+	void saveDonation(Donation donation);
 	
-	Double totalBudget(int causeId) throws DataAccessException;
+	Double totalBudget(int causeId);
 
 	List<Double> findDonationsByCauses(List<Cause> causes);
 
-	Collection<Donation> findDonations(int causeId) throws DataAccessException;
+	Collection<Donation> findDonations(int causeId);
 
 }
