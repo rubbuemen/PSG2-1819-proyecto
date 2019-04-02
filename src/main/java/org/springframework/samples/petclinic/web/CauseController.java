@@ -83,9 +83,9 @@ public class CauseController {
     public ModelAndView showCause(@PathVariable("causeId") int causeId, Map<String, Object> model) {
     	Collection<Donation> donations;
     	donations = this.clinicService.findDonations(causeId);
+        model.put("donations", donations);
         ModelAndView mav = new ModelAndView("causes/causeDetails");
         mav.addObject(this.clinicService.findCauseById(causeId));
-        model.put("donations", donations);
         mav.addObject("cause",this.clinicService.findCauseById(causeId));
         return mav;
     }

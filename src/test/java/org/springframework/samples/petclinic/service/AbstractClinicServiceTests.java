@@ -19,6 +19,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 
 import java.time.LocalDate;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -320,6 +321,13 @@ public abstract class AbstractClinicServiceTests {
 		boolean result = Utilidades.wrongDates(hotel);
 		
 		assertThat(result).isFalse();
+	}
+	
+	@Test
+	@Transactional
+	public void testFindDonationsCauses() {
+		List<Double> amounts = this.clinicService.findDonationsByCauses((List<Cause>) clinicService.findCauses());
+		assertThat(amounts.isEmpty()).isFalse();
 	}
 
 }

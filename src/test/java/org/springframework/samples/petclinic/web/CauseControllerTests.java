@@ -42,10 +42,10 @@ public class CauseControllerTests {
 
     @Test
 	public void testProcessNewCauseFormSuccess() throws Exception {
-		mockMvc.perform(post("/causes/new", TEST_CAUSE_ID).param("name", "George").param("description", "Cause description").param("budgetTarget", "20.0").param("organization", "Cause organization")
+		mockMvc.perform(post("/causes/new", TEST_CAUSE_ID).param("name", "George").param("description", "Cause description").param("budgetTarget", "20.0").param("organization", "Cause organization").param("isClosed", "false")
         )
-            .andExpect(status().isOk())
-            .andExpect(view().name("causes/createOrUpdateCauseForm"));
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/causes"));
     }
 
     @Test
