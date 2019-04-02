@@ -8,7 +8,7 @@
 | Day 3         |    :smiley:   |                |                |                |                |                |
 | Day 4         |               |                |                |                |                |                |
 | Day 5         |    :smiley:   | :neutral_face: |                |                |                |  :neutral_face:|
-| Day 6         |               |                |    :smiley:    |                |    :smiley:    |  :smiley:      |
+| Day 6         |               |                |    :smiley:    |   :smiley:     |    :smiley:    |  :smiley:      |
 | Day 7         |               |                |                |                |                |                |
 | Day 8         |               |                |                |                |                |                |
 | Day 9         |               |                |                |                |                |                |
