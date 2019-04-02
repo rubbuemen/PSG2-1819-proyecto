@@ -23,6 +23,7 @@ import java.util.Collection;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.samples.petclinic.model.Cause;
+import org.springframework.samples.petclinic.model.Donation;
 import org.springframework.samples.petclinic.model.Hotel;
 import org.springframework.samples.petclinic.model.Owner;
 import org.springframework.samples.petclinic.model.Pet;
@@ -251,6 +252,25 @@ public abstract class AbstractClinicServiceTests {
 		assertThat(cause.getId().longValue()).isNotEqualTo(0);
 		causes = this.clinicService.findCauses();
 		assertThat(causes.size()).isEqualTo(found + 1);
+	}
+	
+	@Test
+	@Transactional
+	public void shouldAddNewDonationForCause() {
+		Cause cause1 = this.clinicService.findCauseById(1);
+		int found = cause1.getDonations().size();
+		Donation donation = new Donation();
+		cause1.addDonation(donation);
+		donation.setAmount(20.0);
+		donation.setClient("test client");
+		donation.setDate(LocalDate.of(2019, 10, 15));
+		donation.setCause(cause1);
+		this.clinicService.saveDonation(donation);
+		this.clinicService.saveCause(cause1);
+
+		cause1 = this.clinicService.findCauseById(1);
+		assertThat(cause1.getDonations().size()).isEqualTo(found + 1);
+		assertThat(donation.getId()).isNotNull();
 	}
 
 }
