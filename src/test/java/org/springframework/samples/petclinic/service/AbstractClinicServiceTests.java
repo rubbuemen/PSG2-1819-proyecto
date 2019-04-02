@@ -31,6 +31,7 @@ import org.springframework.samples.petclinic.model.PetType;
 import org.springframework.samples.petclinic.model.Vet;
 import org.springframework.samples.petclinic.model.Visit;
 import org.springframework.samples.petclinic.util.EntityUtils;
+import org.springframework.samples.petclinic.util.Utilidades;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -271,6 +272,54 @@ public abstract class AbstractClinicServiceTests {
 		cause1 = this.clinicService.findCauseById(1);
 		assertThat(cause1.getDonations().size()).isEqualTo(found + 1);
 		assertThat(donation.getId()).isNotNull();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupied() {
+		Pet pet = this.clinicService.findPetById(7);
+		Hotel hotel = new Hotel();
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 10, 15));
+		hotel.setEndDate(LocalDate.of(2019, 11, 15));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, clinicService.findHotelsByPetId(pet.getId()));
+		
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelWrongDates() {
+		Pet pet = this.clinicService.findPetById(7);
+		Hotel hotel = new Hotel();
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 11, 15));
+		hotel.setEndDate(LocalDate.of(2019, 10, 15));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.wrongDates(hotel);
+		
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelWrongDatesNegative() {
+		Pet pet = this.clinicService.findPetById(7);
+		Hotel hotel = new Hotel();
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 10, 15));
+		hotel.setEndDate(LocalDate.of(2019, 11, 15));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.wrongDates(hotel);
+		
+		assertThat(result).isFalse();
 	}
 
 }
