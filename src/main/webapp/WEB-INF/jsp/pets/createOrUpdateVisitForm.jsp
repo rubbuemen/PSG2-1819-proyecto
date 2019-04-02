@@ -17,7 +17,7 @@
     <jsp:body>
         <h2><c:if test="${visit['new']}"><fmt:message key="newVisit"/></c:if></h2>
 
-        <b><fmt:message key="pet"/></b>
+        <strong><fmt:message key="pet"/></strong>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -53,7 +53,7 @@
         </form:form>
 
         <br/>
-        <b><fmt:message key="previousVisit"/></b>
+        <strong><fmt:message key="previousVisit"/></strong>
         <table class="table table-striped">
             <tr>
                 <th><fmt:message key="date"/></th>

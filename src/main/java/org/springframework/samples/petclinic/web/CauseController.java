@@ -53,7 +53,7 @@ public class CauseController {
      
         List<Double> donations=new ArrayList<>(this.clinicService.findDonationsByCauses(causes));
         
-        Map<Cause,Double> res=new HashMap<Cause,Double>();
+        Map<Cause,Double> res=new HashMap<>();
         for(int i=0;i<causes.size();i++) {
         	res.put(causes.get(i), donations.get(i));
         }
@@ -81,7 +81,7 @@ public class CauseController {
     
     @GetMapping("/causes/{causeId}")
     public ModelAndView showCause(@PathVariable("causeId") int causeId, Map<String, Object> model) {
-    	Collection<Donation> donations = new ArrayList<>();
+    	Collection<Donation> donations;
     	donations = this.clinicService.findDonations(causeId);
         ModelAndView mav = new ModelAndView("causes/causeDetails");
         mav.addObject(this.clinicService.findCauseById(causeId));

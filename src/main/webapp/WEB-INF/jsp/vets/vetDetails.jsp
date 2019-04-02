@@ -13,7 +13,7 @@
     <table class="table table-striped">
         <tr>
             <th><fmt:message key="name"/></th>
-            <td><b><c:out value="${vet.firstName} ${vet.lastName}"/></b></td>
+            <td><strong><c:out value="${vet.firstName} ${vet.lastName}"/></strong></td>
         </tr>
          <tr>
             <th><fmt:message key="specialties"/></th>

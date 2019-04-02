@@ -55,7 +55,7 @@ public class DonationController {
     @PostMapping(value = "/donations/new")
     public String processCreationForm(Cause cause, @Valid Donation donation, BindingResult result, ModelMap model) {
     	donation.setCause(cause);
-    	if (cause.getIsClosed()==true){
+    	if (cause.getIsClosed()){
             result.rejectValue("client", "closed");
             result.rejectValue("amount", "closed");
     	} 

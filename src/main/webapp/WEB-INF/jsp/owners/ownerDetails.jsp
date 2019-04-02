@@ -13,7 +13,7 @@
     <table class="table table-striped">
         <tr>
             <th><fmt:message key="name"/></th>
-            <td><b><c:out value="${owner.firstName} ${owner.lastName}"/></b></td>
+            <td><strong><c:out value="${owner.firstName} ${owner.lastName}"/></strong></td>
         </tr>
         <tr>
             <th><fmt:message key="address"/></th>
@@ -48,7 +48,7 @@
         <c:forEach var="pet" items="${owner.pets}">
 
             <tr>
-                <td valign="top">
+                <td style="vertical-align: top;">
                     <dl class="dl-horizontal">
                         <dt><fmt:message key="name"/></dt>
                         <dd><c:out value="${pet.name}"/></dd>
@@ -58,7 +58,7 @@
                         <dd><c:out value="${pet.type.name}"/></dd>
                     </dl>
                 </td>
-                <td valign="top">
+                <td style="vertical-align: top;">
                     <table class="table-condensed">
                         <thead>
                         <tr>
@@ -98,7 +98,7 @@
                         </tr>
                     </table>
                 </td>
-                <td valign="top">
+                <td style="vertical-align: top;">
                     <table class="table-condensed">
                         <thead>
                         <tr>

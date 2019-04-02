@@ -18,7 +18,7 @@
     <jsp:body>
         <h2><c:if test="${hotel['new']}"><fmt:message key="newRoom"/></c:if></h2>
 
-        <b><fmt:message key="pet"/></b>
+        <strong><fmt:message key="pet"/></strong>
         <table class="table table-striped">
             <thead>
             <tr>
@@ -55,7 +55,7 @@
         </form:form>
 
         <br/>
-        <b><fmt:message key="previousRoom"/></b>
+        <strong><fmt:message key="previousRoom"/></strong>
         <table class="table table-striped">
             <tr>
             	<th><fmt:message key="details"/></th>

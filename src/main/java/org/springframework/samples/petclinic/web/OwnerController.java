@@ -15,7 +15,6 @@
  */
 package org.springframework.samples.petclinic.web;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
@@ -142,7 +141,7 @@ public class OwnerController {
     @GetMapping(value = "/owners/{ownerId}/delete")
     public String delete(@PathVariable("ownerId") int ownerId, ModelMap model) {
         Owner owner = this.clinicService.findOwnerById(ownerId);
-    	List<Pet> pets = new ArrayList<>();
+    	List<Pet> pets;
         pets = owner.getPets();
         for (Pet pet : pets) {
 	        this.clinicService.deleteAllHotelsByPetId(pet.getId());

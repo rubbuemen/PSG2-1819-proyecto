@@ -56,3 +56,12 @@ INSERT INTO hotels VALUES (1, 1, 'Le gusta la carne', '2019-02-11', '2019-02-13'
 INSERT INTO hotels VALUES (2, 4, 'Le gusta comer mucho', '2019-06-30', '2019-07-01');
 INSERT INTO hotels VALUES (3, 1, 'Le gusta dormir tranquilo', '2019-05-23', '2019-05-25');
 INSERT INTO hotels VALUES (4, 5, 'Le gusta que lo acaricien', '2019-02-14', '2019-02-20');
+
+INSERT INTO causes VALUES (1, 'Por los animalicos', 'Para ayudar a nuestras mascotas', '2000.0', 'Animales S.L.', false);
+INSERT INTO causes VALUES (2, 'Necesitamos dinero', 'Gatitos bonitos', '1000.0', 'Gatitos S.L.', true);
+
+INSERT INTO donations VALUES (1, 'Antonio', '2019-03-22', '53.52', 1);
+INSERT INTO donations VALUES (2, 'Francisco', '2019-03-26', '251.15', 2);
+INSERT INTO donations VALUES (3, 'Octavio', '2019-03-29', '61.81', 1);
+INSERT INTO donations VALUES (4, 'Matilda', '2019-04-02', '824.13', 2);
+INSERT INTO donations VALUES (5, 'Rosa', '2019-04-02', '523.241', 1);
