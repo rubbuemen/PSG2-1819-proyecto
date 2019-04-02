@@ -109,10 +109,6 @@ public class Cause extends BaseEntity {
 	    return this.donations;
 	}
 
-	protected void setDonationsInternal(Set<Donation> donations) {
-	    this.donations = donations;
-	}
-
 	public List<Donation> getDonations() {
 	    List<Donation> sortedDonations = new ArrayList<>(getDonationsInternal());
 	    PropertyComparator.sort(sortedDonations, new MutableSortDefinition("date", false, false));

@@ -277,16 +277,119 @@ public abstract class AbstractClinicServiceTests {
 	
 	@Test
 	@Transactional
-	public void testUtilitiesHotelPetOccupied() {
-		Pet pet = this.clinicService.findPetById(7);
+	public void testUtilitiesHotelPetOccupiedFalse() {
+		Pet pet = this.clinicService.findPetById(1);
 		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
 		pet.addHotel(hotel);
 		hotel.setDetails("testDetails");
 		hotel.setStartDate(LocalDate.of(2019, 10, 15));
 		hotel.setEndDate(LocalDate.of(2019, 11, 15));
 		this.clinicService.saveHotel(hotel);
 		this.clinicService.savePet(pet);
-		boolean result = Utilidades.petWithRoom(hotel, clinicService.findHotelsByPetId(pet.getId()));
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
+		
+		assertThat(result).isFalse();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupiedTrue1() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 1, 15));
+		hotel.setEndDate(LocalDate.of(2019, 1, 19));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
+		
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupiedTrue2() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 1, 14));
+		hotel.setEndDate(LocalDate.of(2019, 1, 19));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
+		
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupiedTrue3() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 1, 11));
+		hotel.setEndDate(LocalDate.of(2019, 1, 16));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
+		
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupiedTrue4() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 1, 11));
+		hotel.setEndDate(LocalDate.of(2019, 1, 20));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
+		
+		assertThat(result).isTrue();
+	}
+	
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupiedTrue5() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 1, 14));
+		hotel.setEndDate(LocalDate.of(2019, 1, 20));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
+		
+		assertThat(result).isTrue();
+	}
+
+	@Test
+	@Transactional
+	public void testUtilitiesHotelPetOccupiedTrue6() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = new Hotel();
+		Collection<Hotel> hotels = clinicService.findHotelsByPetId(pet.getId());
+		pet.addHotel(hotel);
+		hotel.setDetails("testDetails");
+		hotel.setStartDate(LocalDate.of(2019, 1, 11));
+		hotel.setEndDate(LocalDate.of(2019, 1, 25));
+		this.clinicService.saveHotel(hotel);
+		this.clinicService.savePet(pet);
+		boolean result = Utilidades.petWithRoom(hotel, hotels);
 		
 		assertThat(result).isTrue();
 	}
@@ -328,6 +431,46 @@ public abstract class AbstractClinicServiceTests {
 	public void testFindDonationsCauses() {
 		List<Double> amounts = this.clinicService.findDonationsByCauses((List<Cause>) clinicService.findCauses());
 		assertThat(amounts.isEmpty()).isFalse();
+	}
+	
+	@Test
+	@Transactional
+	public void testFindCauseByDonation() {
+		Donation donation = this.clinicService.findByDonationId(1);
+		Cause cause = donation.getCause();
+		assertThat(cause).isNotNull();
+	}
+	
+	@Test
+	@Transactional
+	public void testDeletePet() {
+		Pet pet = this.clinicService.findPetById(10);
+		clinicService.deletePet(pet);
+		assertThat(clinicService.findPetById(pet.getId())).isNotNull();
+	}
+	
+	@Test
+	@Transactional
+	public void testDeleteVisit() {
+		Pet pet = this.clinicService.findPetById(7);
+		Visit visit = pet.getVisits().iterator().next();
+		pet.deleteVisit(visit);
+        this.clinicService.savePet(pet);
+
+        this.clinicService.deleteVisit(visit.getId());
+        assertThat(pet.getVisits().contains(visit)).isFalse();
+	}
+	
+	@Test
+	@Transactional
+	public void testDeleteHotel() {
+		Pet pet = this.clinicService.findPetById(1);
+		Hotel hotel = pet.getHotels().iterator().next();
+		pet.deleteHotel(hotel);
+        this.clinicService.savePet(pet);
+
+        this.clinicService.deleteHotel(hotel.getId());
+        assertThat(pet.getHotels().contains(hotel)).isFalse();
 	}
 
 }

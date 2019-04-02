@@ -35,6 +35,7 @@ public interface CauseRepository {
     @Query("SELECT d FROM Donation d where d.cause.id=:causeId")
     Collection<Donation> findDonations(@Param(value = "causeId") int causeId);
     
+    @Query("SELECT c FROM Cause c")
     Collection<Cause> findAll();
     
 }

@@ -85,7 +85,6 @@ public class CauseController {
     	donations = this.clinicService.findDonations(causeId);
         model.put("donations", donations);
         ModelAndView mav = new ModelAndView("causes/causeDetails");
-        mav.addObject(this.clinicService.findCauseById(causeId));
         mav.addObject("cause",this.clinicService.findCauseById(causeId));
         return mav;
     }

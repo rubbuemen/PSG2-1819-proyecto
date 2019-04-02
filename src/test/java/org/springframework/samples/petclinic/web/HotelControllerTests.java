@@ -26,6 +26,8 @@ import org.springframework.test.web.servlet.setup.MockMvcBuilders;
 public class HotelControllerTests {
 
     private static final int TEST_PET_ID = 1;
+    private static final int TEST_OWNER_ID = 1;
+    private static final int TEST_HOTEL_ID = 1;
 
     @Autowired
     private HotelController hotelController;
@@ -73,6 +75,13 @@ public class HotelControllerTests {
             .andExpect(status().isOk())
             .andExpect(model().attributeExists("hotels"))
             .andExpect(view().name("hotelList"));
+    }
+    
+    @Test
+    public void testDeleteHotel() throws Exception {
+        mockMvc.perform(get("/owners/{ownerId}/pets/{petId}/hotels/{hotelId}/delete", TEST_OWNER_ID, TEST_PET_ID, TEST_HOTEL_ID))
+            .andExpect(status().is3xxRedirection())
+            .andExpect(view().name("redirect:/owners/{ownerId}"));
     }
 
 

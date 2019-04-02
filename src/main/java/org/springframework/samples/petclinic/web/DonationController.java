@@ -53,7 +53,7 @@ public class DonationController {
     }
 
     @PostMapping(value = "/donations/new")
-    public String processCreationForm(Cause cause, @Valid Donation donation, BindingResult result, ModelMap model) {
+    public String processCreationForm(@ModelAttribute Cause cause, @Valid Donation donation, BindingResult result, ModelMap model) {
     	donation.setCause(cause);
     	if (cause.getIsClosed()){
             result.rejectValue("client", "closed");
@@ -65,7 +65,7 @@ public class DonationController {
         } else {
             this.clinicService.saveDonation(donation);
             cause.addDonation(donation);
-            if(cause.getBudgetTarget() <= clinicService.totalBudget(cause.getId())){
+            if(cause.getBudgetTarget() <= clinicService.totalBudget(donation.getCause().getId())){
             	cause.setIsClosed(true);
             this.clinicService.saveCause(cause);
             }

@@ -26,6 +26,7 @@ public class CauseControllerTests {
     @Autowired
     private CauseController causeController;
 
+
     private MockMvc mockMvc;
 
     @BeforeEach
@@ -63,6 +64,13 @@ public class CauseControllerTests {
     	 mockMvc.perform(get("/causes"))
          .andExpect(status().isOk())
          .andExpect(view().name("causes/causeList"));
+    }
+    
+    @Test
+    public void testShowCause() throws Exception {
+    	 mockMvc.perform(get("/causes/{causeId}", TEST_CAUSE_ID))
+         .andExpect(status().isOk())
+         .andExpect(view().name("causes/causeDetails"));
     }
 
 }

@@ -55,6 +55,12 @@ public class DonationControllerTests {
 				.param("date", "2015/02/12").param("client", "test")).andExpect(status().is3xxRedirection())
 				.andExpect(view().name("redirect:/causes"));
 	}
+	
+	@Test
+	public void testProcessCreationFormErrors() throws Exception {
+		mockMvc.perform(post("/causes/{causeId}/donations/new", TEST_CAUSE_ID)).andExpect(status().isOk())
+				.andExpect(view().name("donations/createOrUpdateDonationForm"));
+	}
 
 
 }
